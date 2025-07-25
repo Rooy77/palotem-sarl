@@ -10,9 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Palotem Sarl',
   description: 'Agence digitale spécialisée dans les services web',
-  icons : {
-    icon : "/favicon.ico",
-  }
+  
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
