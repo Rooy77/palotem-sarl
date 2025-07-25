@@ -1,8 +1,16 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+type ContactForm = {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+};
+
 export async function POST(req: Request) {
-  const data = await req.json();
+  const data: ContactForm = await req.json();
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -24,12 +32,16 @@ export async function POST(req: Request) {
       <p><strong>Message :</strong><br />${data.message}</p>
     `
   };
-
+  
   try {
     await transporter.sendMail(mailOptions);
     return NextResponse.json({ success: true });
-  } catch (err: any) {
-    console.error(err);
-    return NextResponse.json({ error: 'Échec de l’envoi' }, { status: 500 });
+  } catch (err: unknown) {
+  if (err instanceof Error) {
+    console.error(err.message);
+  } else {
+    console.error("Erreur inconnue :", err);
   }
+  return NextResponse.json({ error: 'Échec de l’envoi' }, { status: 500 });
+}
 }

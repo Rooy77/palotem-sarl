@@ -4,45 +4,66 @@ import { useState } from "react";
 import Image from "next/image";
 
 export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  try {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    });
+    e.preventDefault();
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
 
-    console.log('Response status:', res.status);
+      console.log('Response status:', res.status);
 
-    if (!res.ok) {
-      // Lire la réponse texte pour debug
-      const text = await res.text();
-      console.error('Erreur API:', text);
-      alert("Erreur serveur : " + text);
-      return;
+      if (!res.ok) {
+        const text = await res.text();
+        console.error('Erreur API:', text);
+        alert("Erreur serveur : " + text);
+        return;
+      }
+
+      await res.json();
+      alert("Message envoyé avec succès !");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: ""
+      });
+    } catch (err) {
+      alert("Erreur réseau");
+      console.error(err);
     }
-
-    const result = await res.json();
-    alert("Message envoyé avec succès !");
-  } catch (err) {
-    alert("Erreur réseau");
-    console.error(err);
-  }
-};
-
+  };
 
   return (
     <section>
       <div className="relative w-full h-[40vh]">
-        <div
-          className="absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-100 z-10"
-        >
+        <div className="absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-100 z-10">
           <Image
             src="/img/page-title.jpg"
             fill
             className="object-cover"
-            sizes="100vw" alt={""}          />
+            sizes="100vw"
+            alt="Image de fond"
+          />
           <div className="absolute bg-gray-800/30 inset-0 flex items-center justify-left text-white text-center">
             <div className="max-w-6xl mx-auto px-4 py-16">
               <div className="max-w-3xl flex md:text-5xl font-semibold text-xl cursor-pointer">
@@ -58,6 +79,7 @@ export default function ContactSection() {
           </div>
         </div>
       </div>
+
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10">
           <div>
@@ -65,6 +87,7 @@ export default function ContactSection() {
             <p className="text-gray-600 text-5xl mb-6 barlow-condensed-medium">
               <span className="barlow-condensed-light"> You can </span> contact us, <br /> if you have any query.
             </p>
+
             <form className="grid gap-4" onSubmit={handleSubmit}>
               <div className="flex gap-4">
                 <input
@@ -86,6 +109,7 @@ export default function ContactSection() {
                   required
                 />
               </div>
+
               <div className="flex gap-4">
                 <input
                   name="phone"
@@ -105,6 +129,7 @@ export default function ContactSection() {
                   required
                 />
               </div>
+
               <textarea
                 name="message"
                 value={formData.message}
@@ -114,6 +139,7 @@ export default function ContactSection() {
                 className="border border-gray-300 px-4 py-2 text-gray-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-orange-500"
                 required
               />
+
               <button
                 type="submit"
                 className="bg-orange-500 text-white text-sm font-medium py-2 px-6 hover:bg-orange-600 transition"
@@ -122,10 +148,12 @@ export default function ContactSection() {
               </button>
             </form>
           </div>
+
           <div className="space-y-4 sm:space-y-5">
             <div className="space-y-4 bg-orange-500 p-8 h-auto w-auto">
+              {/* Contact Email */}
               <div className="flex items-start space-x-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-primary mt-1 flex-shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary mt-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
                 <div>
                   <h3 className="text-md font-medium text-foreground">Email</h3>
                   <a href="mailto:societepalotemgroup@gmail.com" className="text-sm font-light text-muted-foreground hover:text-primary transition-colors break-all">
@@ -133,8 +161,10 @@ export default function ContactSection() {
                   </a>
                 </div>
               </div>
+
+              {/* Téléphone */}
               <div className="flex items-start space-x-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-primary mt-1 flex-shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary mt-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 <div>
                   <h3 className="text-md font-medium text-foreground">Téléphone (Support WhatsApp)</h3>
                   <a href="tel:+243979370937" className="text-sm font-light text-muted-foreground hover:text-primary transition-colors break-all">
@@ -142,13 +172,15 @@ export default function ContactSection() {
                   </a>
                 </div>
               </div>
+
+              {/* Adresse */}
               <div className="flex items-start space-x-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-primary mt-1 flex-shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary mt-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 <div>
                   <h3 className="text-md font-medium text-foreground">Bureau (Sur Rendez-vous)</h3>
                   <p className="text-sm font-light text-muted-foreground hover:text-primary transition-colors break-all">
                     <span className="font-medium">Adresse siège : </span>Goma, 03 Av. de la Frontière, Q. Katindo <br />
-                    <span className="font-medium">Bureau L'shi : </span> 96 Av. du Cadastre, Q. Salama, C. L'shi <br />
+                    <span className="font-medium">Bureau L&apos;shi : </span> 96 Av. du Cadastre, Q. Salama, C. L&apos;shi <br />
                     <span className="font-medium">Adresse :</span> Lubumbashi-Goma-Bukavu-Kinshasa/RD. Congo
                   </p>
                 </div>
@@ -158,5 +190,5 @@ export default function ContactSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

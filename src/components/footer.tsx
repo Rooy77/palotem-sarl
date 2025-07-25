@@ -17,17 +17,23 @@ const LINKS = [
     items: ["Email", "Téléphone", "Adresse"],
   },
 ];
+
 const teaFooter = [
   {
     facebook: "https://facebook.com/linda.kanku",
     twitter: "https://x.com/linda_projects",
     linkedin: "#",
-  }
-]
+  },
+];
 
 const currentYear = new Date().getFullYear();
 
 export function Footer() {
+  // Texte avec apostrophes typographiques directement ici
+  const addressGoma = "Adresse siège : Goma, 03 Av. de la Frontière, Q. Katindo";
+  const addressLubumbashi = "Bureau L’shi : 96 Av. du Cadastre, Q. Salama, C. L’shi";
+  const copyright = "Tous droits réservés.";
+
   return (
     <footer className="relative w-full bg-gray-900 text-gray-300">
       <div className="mx-auto w-full max-w-7xl px-8 py-16">
@@ -41,15 +47,17 @@ export function Footer() {
                 height={100}
                 className="rounded-full"
               />
-              <h2 className="text-2xl text-white">SOCIETE <br /> PALOTEM Sarl</h2>
+              <h2 className="text-2xl text-white">
+                SOCIÉTÉ <br /> PALOTEM Sarl
+              </h2>
             </div>
             <div className="font-light text-gray-400 text-sm">
-              <p>Adresse siège : Goma, 03 Av. de la Frontière, Q. Katindo</p>
-              <p>Bureau L'shi : 96 Av. du Cadastre, Q. Salama, C. L'shi</p>
+              <p>{addressGoma}</p>
+              <p>{addressLubumbashi}</p>
             </div>
             <div className="flex max-w-full items-center gap-4 mt-3">
               {teaFooter.map((member, index) => (
-                <div key={index} className="">
+                <div key={index}>
                   <div className="mt-4 flex justify-center gap-3">
                     <a
                       href={member.facebook}
@@ -80,7 +88,7 @@ export function Footer() {
               ))}
             </div>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {LINKS.map(({ title, items }) => (
               <div key={title}>
@@ -103,10 +111,10 @@ export function Footer() {
             ))}
           </div>
         </div>
-        <div className="">
-          <div className="md:grid-cols-2 gap-6 text-sm text-gray-400 border-t border-gray-700 pt-6"></div>
+
+        <div>
           <p className="text-center text-xs text-gray-500">
-            &copy; {currentYear} PALOTEM Sarl. Tous droits réservés.
+            &copy; {currentYear} PALOTEM Sarl. {copyright}
           </p>
         </div>
       </div>

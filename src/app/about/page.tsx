@@ -23,7 +23,7 @@ export default function AboutPage() {
                 <div className="col col-xs-12">
                     <h2>About us</h2>
                     <ol className="text-sm text-center font-light justify-center flex space-x-2">
-                        <li className="text-orange-500"><a href="#">Home</a> ></li>
+                        <li className="text-orange-500"><a href="#">Home</a> {'>'}</li>
                         <li>About us</li>
                     </ol>
                 </div>

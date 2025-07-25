@@ -41,7 +41,11 @@ export default function ServicesPage() {
                 <div className="col col-xs-12">
                     <h2>Service</h2>
                     <ol className="text-sm text-center font-light justify-center flex space-x-2">
-                        <li className="text-orange-500"><a href="#">Home</a> ></li>
+                        <li className="text-orange-500">
+                          <Link href="/">
+                            Home
+                          </Link>  &gt;
+                        </li>
                         <li>Service</li>
                     </ol>
                 </div>
