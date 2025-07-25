@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: 'Palotem Sarl',
     images: [
       {
-        url: 'https://palotem-sarl.vercel.app/og-image.jpg', // Place cette image dans /public
+        url: 'http://localhost:3000/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75', // Place cette image dans /public
         width: 1200,
         height: 630,
         alt: 'Présentation de Palotem Sarl'
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Palotem Sarl - Agence Digitale',
     description: 'Découvrez nos services web, design et communication digitale.',
-    images: ['https://palotem-sarl.vercel.app/og-image.jpg'],
+    images: ['http://localhost:3000/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75'],
     creator: '@palotem_sarl' // remplace par ton handle Twitter, ou supprime si non utilisé
   }
 }
