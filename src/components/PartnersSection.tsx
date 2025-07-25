@@ -3,12 +3,12 @@
 import Image from "next/image";
 
 const partners = [
-  "/logos/partner1.png",
-  "/logos/partner2.png",
-  "/logos/partner3.png",
-  "/logos/partner4.png",
-  "/logos/partner5.png",
-  "/logos/partner6.png",
+  "/img/port.jpg",
+  "/img/port.jpg",
+  "/img/port.jpg",
+  "/img/port.jpg",
+  "/img/port.jpg",
+  "/img/port.jpg",
 ];
 
 export default function PartnersSection() {
