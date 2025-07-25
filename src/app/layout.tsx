@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: 'Palotem Sarl',
     images: [
       {
-        url: 'https://palotem-sarl.vercel.app/og-image.jpg',
+        url: 'https://palotem-sarl.vercel.app/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75',
         width: 1200,
         height: 630,
         alt: 'Présentation de Palotem Sarl',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Palotem Sarl - Agence Digitale',
     description: 'Découvrez nos services web, design et communication digitale.',
-    images: ['https://palotem-sarl.vercel.app/og-image.jpg'],
+    images: ['https://palotem-sarl.vercel.app/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75'],
   },
   icons: {
     icon: '/favicon.ico',
@@ -44,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://palotem-sarl.vercel.app/og-image.jpg" />
+        <meta property="og:image" content="https://palotem-sarl.vercel.app/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75" />
         <meta name="twitter:card" content="summary_large_image" />
       </head>
       <body className={inter.className}>
