@@ -31,9 +31,6 @@ export const metadata: Metadata = {
     description: 'Notre expertise couvre le commerce général, l’import-export, les produits agricoles, les matériaux de construction, le génie civil, les énergies et les services logistiques.',
     images: ['https://palotem-sarl.vercel.app/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75'],
   },
-  icons: {
-    icon: '/favicon.ico',
-  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
