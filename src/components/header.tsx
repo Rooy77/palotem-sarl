@@ -88,11 +88,13 @@ export default function Header() {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
-            className={`md:hidden transition-colors duration-300 ${
-              scrolled ? "text-gray-700" : "text-white"
-            }`}
-          >
-            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            aria-expanded={menuOpen}
+            className={`md:hidden p-2 transition-all duration-300 ${
+              scrolled
+                ? 'bg-white text-orange-600 border border-orange-600'
+                : 'bg-orange-600 text-white'
+            }`}>
+            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
