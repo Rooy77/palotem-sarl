@@ -22,7 +22,7 @@ export default function AboutPage() {
         <p className="uppercase text-sm tracking-widest text-orange-600 barlow-condensed-regular">About us</p>
         <h1 className="text-4xl font-bold text-gray-900">
           <span className="block text-gray-700">Welcome to</span>
-          Royal Import Export Sarl
+          Society Palotem Sarl
         </h1>
 
         <div className="w-20 h-1 bg-orange-500 rounded"></div>

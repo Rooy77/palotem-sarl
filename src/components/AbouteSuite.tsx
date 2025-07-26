@@ -19,7 +19,7 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <section className="py-12 px-4 md:px-8 lg:px-16">
+    <section className="">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, idx) => (
           <motion.div
@@ -30,10 +30,10 @@ export default function ServicesPage() {
             transition={{ delay: idx * 0.2, duration: 0.6 }}
             className="bg-white p-6 border border-gray-100 transition"
           >
-            <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
+            <h2 className="text-sm md:text-2xl font-semibold text-gray-800 mb-2">
               {service.title}
             </h2>
-            <p className="text-sm md:text-base text-gray-600 font-light leading-relaxed">
+            <p className="text-sm md:text-sm text-gray-600 font-light leading-relaxed">
               {service.description}
             </p>
           </motion.div>
