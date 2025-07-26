@@ -33,19 +33,19 @@ export default function Header() {
         scrolled ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto py-1 sm:px-6 lg:px-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
         <div className="flex justify-between items-center h-16">
-          {/* Logo image + texte */}
+          {/* Logo + texte */}
           <Link href="/" className="flex items-center space-x-2">
             <Image
               src="/logos/logopalotem.jpg"
               alt="Logo Palotem"
-              width={50}
-              height={50}
+              width={48}
+              height={48}
               className="rounded-full object-cover"
             />
             <span
-              className={`text-2xl barlow-condensed-regular transition-colors duration-300 ${
+              className={`text-2xl font-semibold barlow-condensed-regular transition-colors duration-300 ${
                 scrolled ? "text-gray-800" : "text-white"
               }`}
             >
@@ -53,13 +53,13 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Navigation desktop */}
-          <div className="hidden md:flex items-center space-x-7">
+          {/* Menu Desktop */}
+          <nav className="hidden md:flex items-center space-x-7">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-xl barlow-condensed-regular hover:text-orange-600 transition-colors duration-200 ${
+                className={`text-lg font-medium barlow-condensed-regular hover:text-orange-600 transition-colors duration-200 ${
                   pathname === item.href
                     ? "text-orange-600"
                     : scrolled
@@ -70,49 +70,56 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-
-            {/* Bouton stylisé avec icône */}
             <Link
               href="/quote"
-              className={`ml-4 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+              className={`ml-4 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200 ${
                 scrolled
-                  ? "text-white bg-orange-600 hover:bg-gray-100 hover:text-orange-600"
-                  : "text-white bg-orange-600 hover:bg-orange-600/20"
+                  ? "bg-orange-600 text-white hover:bg-gray-100 hover:text-orange-600"
+                  : "bg-orange-600 text-white hover:bg-orange-600/20"
               }`}
             >
               Get a quote
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </nav>
 
-          {/* Menu hamburger mobile */}
+          {/* Menu Hamburger */}
           <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
             className={`md:hidden transition-colors duration-300 ${
               scrolled ? "text-gray-700" : "text-white"
             }`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
           >
             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Navigation mobile */}
+      {/* Menu Mobile */}
       {menuOpen && (
-        <div className="md:hidden bg-white barlow-condensed-regular shadow-md px-4 py-4 space-y-4">
+        <div className="md:hidden bg-white shadow-md px-4 py-4 space-y-4">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`block text-sm hover:text-blue-600 transition-colors duration-200 ${
-                pathname === item.href ? "text-blue-600" : "text-gray-700"
-              }`}
               onClick={() => setMenuOpen(false)}
+              className={`block text-base font-medium barlow-condensed-regular transition-colors duration-200 ${
+                pathname === item.href ? "text-orange-600" : "text-gray-700"
+              }`}
             >
               {item.label}
             </Link>
           ))}
+          <Link
+            href="/quote"
+            onClick={() => setMenuOpen(false)}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-600 text-white text-sm font-semibold hover:bg-orange-500 transition"
+          >
+            Get a quote
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       )}
     </header>

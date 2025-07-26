@@ -10,15 +10,20 @@ const slides = [
 ];
 
 const captions = [
-    <>
-        <span className="barlow-condensed-regular">PALOTEM Sarl, l’excellence </span> <br /> congolaise au service de l’Afrique
-    </>,
-    <>
-        <span className="barlow-condensed-regular">Des solutions fiables </span>pour un développement durable
-    </>,
-    <>
-        <span className="barlow-condensed-regular">Présents en RDC, </span><br /> en Afrique et à l’international
-    </>,
+  <>
+    <span className="barlow-condensed-regular">PALOTEM Sarl, l’excellence </span>
+    <br />
+    congolaise au service de l’Afrique
+  </>,
+  <>
+    <span className="barlow-condensed-regular">Des solutions fiables </span>
+    pour un développement durable
+  </>,
+  <>
+    <span className="barlow-condensed-regular">Présents en RDC, </span>
+    <br />
+    en Afrique et à l’international
+  </>,
 ];
 
 export default function Hero() {
@@ -71,26 +76,30 @@ export default function Hero() {
             priority={index === 0}
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gray-600/50 flex items-center justify-center text-white text-center">
-            <div className="max-w-3xl md:text-5xl font-semibold">
-              <h2 className="text-[9vh]">{captions[index]}</h2>
+          <div className="absolute inset-0 bg-gray-600/50 flex items-center justify-center text-white text-center px-4">
+            <div className="max-w-4xl font-semibold">
+              <h2
+                className="text-[2rem] sm:text-[5vh] md:text-[7vh] lg:text-[8vh] leading-tight"
+              >
+                {captions[index]}
+              </h2>
             </div>
           </div>
         </div>
       ))}
 
-      {/* Flèches */}
+      {/* Flèches - masquées sur petits écrans */}
       <button
         onClick={prevSlide}
         aria-label="Previous Slide"
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-12 h-12 flex items-center justify-center rounded-full hover:bg-black/70 hover:cursor-pointer transition z-20"
+        className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-12 h-12 items-center justify-center rounded-full hover:bg-black/70 transition z-20"
       >
         &#10094;
       </button>
       <button
         onClick={nextSlide}
         aria-label="Next Slide"
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-12 h-12 flex items-center justify-center rounded-full hover:bg-black/70 hover:cursor-pointer  transition z-20"
+        className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-12 h-12 items-center justify-center rounded-full hover:bg-black/70 transition z-20"
       >
         &#10095;
       </button>
