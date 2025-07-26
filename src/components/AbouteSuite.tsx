@@ -28,7 +28,7 @@ export default function ServicesPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.2, duration: 0.6 }}
-            className="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-md transition"
+            className="bg-white p-6 border border-gray-100 hover:shadow-md transition"
           >
             <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
               {service.title}
