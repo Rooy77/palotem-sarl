@@ -27,17 +27,13 @@ const products = [
   { name: "Fer à béton", image: "/images/construction/fer.jpg", description: "Fer à béton pour infrastructures durables.", category: "Matériaux de construction" },
 ];
 
-type Props = {
-  params: { slug: string };
-};
-
 export async function generateStaticParams() {
-  return products.map((product) => ({
+  return products.map(product => ({
     slug: slugifyLocal(product.name),
   }));
 }
 
-export default async function ProductPage({ params }: Props) {
+export default async function ProductPage({ params }: { params: { slug: string } }) {
   const product = products.find(
     (p) => slugifyLocal(p.name) === params.slug
   );
