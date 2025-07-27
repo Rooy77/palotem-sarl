@@ -65,7 +65,7 @@ export default function Produits() {
               <div className="p-4">
                 <h3 className="text-lg font-bold">{product.name}</h3>
                 <p className="text-sm text-gray-600">{product.description}</p>
-                <Link href={`/produits/${slug}`}>
+                <Link href={`/product/${slug}`}>
                   <button className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
                     En savoir plus
                   </button>
