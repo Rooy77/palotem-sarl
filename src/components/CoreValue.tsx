@@ -41,7 +41,7 @@ export default function CorevPage() {
             >
                 <h2 className="text-sm md:text-2xl font-semibold text-gray-800 mb-2 uppercase">
                 {values.title}
-                </h2>
+                </h2> 
                 <p className="text-sm md:text-sm text-gray-600 font-light leading-relaxed">
                 
                 </p>
