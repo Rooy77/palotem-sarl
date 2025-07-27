@@ -44,8 +44,8 @@ export default function Header() {
             <Image
               src="/logos/logopalotem.jpg"
               alt="Logo Palotem"
-              width={48}
-              height={48}
+              width={47}
+              height={47}
               className="rounded-full object-cover"
             />
             <span
