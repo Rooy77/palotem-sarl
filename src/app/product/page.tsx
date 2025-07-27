@@ -80,7 +80,7 @@ export default function Produits() {
         <button
           onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
           disabled={currentPage === 1}
-          className="p-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+          className="p-2 bg-gray-400 rounded hover:bg-gray-400 disabled:opacity-50"
           aria-label="Page précédente"
         >
           <ChevronLeft size={24} />
