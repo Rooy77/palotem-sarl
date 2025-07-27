@@ -13,7 +13,7 @@ const services = [
   },
   {
     title: '03. NOS PILIERS',
-    description: 'At PALOTEM Sarl, we build every relationship and every project around three core principles: Reliability, Quality, and Integrity.',
+    description: 'At Society PALOTEM Sarl, we build every relationship and every project around three core principles: Reliability, Quality, and Integrity.',
   },
 ]
 

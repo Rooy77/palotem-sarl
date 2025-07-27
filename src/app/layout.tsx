@@ -7,10 +7,10 @@ import { Footer } from "@/components/footer"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Palotem Sarl',
+  title: 'Société Palotem Sarl',
   description: 'une société unipersonnelle régie par l’Acte uniforme',
   openGraph: {
-    title: 'Society Palotem Sarl',
+    title: 'Société Palotem Sarl',
     description: 'Notre expertise couvre le commerce général, l’import-export, les produits agricoles, les matériaux de construction, le génie civil, les énergies et les services logistiques',
     url: 'https://palotem-sarl.vercel.app/',
     siteName: 'Palotem Sarl',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: 'https://palotem-sarl.vercel.app/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75',
         width: 1200,
         height: 630,
-        alt: 'Présentation de Palotem Sarl',
+        alt: 'Présentation de Société Palotem Sarl',
       },
     ],
     locale: 'fr_FR',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Palotem Sarl - Agence Digitale',
+    title: 'Société Palotem Sarl',
     description: 'Notre expertise couvre le commerce général, l’import-export, les produits agricoles, les matériaux de construction, le génie civil, les énergies et les services logistiques.',
     images: ['https://palotem-sarl.vercel.app/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75'],
   },

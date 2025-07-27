@@ -1,37 +1,52 @@
 // Footer.tsx
 import Link from "next/link";
-import { FaFacebookF, FaXTwitter, FaLinkedinIn } from "react-icons/fa6";
+import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa6";
 import Image from "next/image";
 
 const LINKS = [
   {
     title: "Entreprise",
-    items: ["À propos", "Nos valeurs", "Historique", "Partenaires"],
+    items: [
+      { name: "À propos", href: "/about" },
+      { name: "Nos services", href: "/service" },
+      { name: "Nos Produits", href: "/product" },
+      { name: "Blog", href: "/blog" },
+      { name : "Palotem Tanzania", href:""},
+    ],
   },
   {
     title: "Services",
-    items: ["Import-Export", "Génie civil", "Logistique", "Énergie"],
+    items: [
+      { name: "Import-Export", href: "/service" },
+      { name: "Génie civil", href: "/service" },
+      { name: "Logistique", href: "/service" },
+      { name: "Énergie", href: "/service" },
+    ],
   },
   {
     title: "Contact",
-    items: ["Email", "Téléphone", "Adresse"],
+    items: [
+      { name: "Email", href: "/contact" },
+      { name: "Téléphone", href: "/contact" },
+      { name: "Adresse", href: "/contact" },
+    ],
   },
 ];
 
 const teaFooter = [
   {
-    facebook: "https://facebook.com/linda.kanku",
-    twitter: "https://x.com/linda_projects",
-    linkedin: "#",
+    facebook: "https://web.facebook.com/palotemgroupsarl/?_rdc=1&_rdr#",
+    insta: "https://www.instagram.com/societepalotemgroup/",
+    linkedin: "https://www.linkedin.com/company/societe-palotem-sarl/?originalSubdomain=cd",
   },
 ];
 
 const currentYear = new Date().getFullYear();
 
 export function Footer() {
-  // Texte avec apostrophes typographiques directement ici
-  const addressGoma = "Adresse siège : Goma, 03 Av. de la Frontière, Q. Katindo";
-  const addressLubumbashi = "Bureau L’shi : 96 Av. du Cadastre, Q. Salama, C. L’shi";
+  const addressGoma = "Commerce Général & Import – Export";
+  const numRccm = "RCCM 15-B-0387, IDNAT 5-9N04241K, N°IMPOT A1520238Q ";
+  const villes = "Lubumbashi • Goma • Bukavu • Kinshasa / RD. Congo" ;
   const copyright = "Tous droits réservés.";
 
   return (
@@ -53,7 +68,8 @@ export function Footer() {
             </div>
             <div className="font-light text-gray-400 text-sm">
               <p>{addressGoma}</p>
-              <p>{addressLubumbashi}</p>
+              <p>{numRccm}</p>
+              <p>{villes}</p>
             </div>
             <div className="flex max-w-full items-center gap-4 mt-3">
               {teaFooter.map((member, index) => (
@@ -68,12 +84,12 @@ export function Footer() {
                       <FaFacebookF size={15} />
                     </a>
                     <a
-                      href={member.twitter}
+                      href={member.insta}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="border-gray-400 border hover:bg-orange-500 hover:text-gray-100 text-gray-400 rounded-full p-2 transition-all duration-300"
                     >
-                      <FaXTwitter size={15} />
+                      <FaInstagram size={15} />
                     </a>
                     <a
                       href={member.linkedin}
@@ -96,13 +112,13 @@ export function Footer() {
                   {title}
                 </h3>
                 <ul className="space-y-2">
-                  {items.map((link) => (
-                    <li key={link}>
+                  {items.map(({ name, href }) => (
+                    <li key={name}>
                       <Link
-                        href="#"
+                        href={href}
                         className="text-sm text-gray-400 hover:text-white transition"
                       >
-                        {link}
+                        {name}
                       </Link>
                     </li>
                   ))}
@@ -114,7 +130,7 @@ export function Footer() {
 
         <div>
           <p className="text-center text-xs text-gray-500">
-            &copy; {currentYear} PALOTEM Sarl. {copyright}
+            &copy; {currentYear} Société Palotem Sarl. {copyright}
           </p>
         </div>
       </div>

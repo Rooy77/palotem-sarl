@@ -3,12 +3,12 @@
 import Image from "next/image";
 
 const partners = [
-  "/img/port.jpg",
-  "/img/port.jpg",
-  "/img/port.jpg",
-  "/img/port.jpg",
-  "/img/port.jpg",
-  "/img/port.jpg",
+  { src: "/img/port.jpg", label: "Logistique portuaire", color: "#FF5733" },
+  { src: "/img/port.jpg", label: "Import / Export", color: "#33C1FF" },
+  { src: "/img/port.jpg", label: "Énergie", color: "#28A745" },
+  { src: "/img/port.jpg", label: "Construction & BTP", color: "#FFC107" },
+  { src: "/img/port.jpg", label: "Consulting professionnel", color: "#8E44AD" },
+  { src: "/img/port.jpg", label: "Transport & Transit", color: "#E74C3C" },
 ];
 
 export default function PartnersSection() {
@@ -16,7 +16,9 @@ export default function PartnersSection() {
     <section className="bg-white py-16">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <div className="text-center mb-12">
-          <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">PARTNERSHIP</p>
+          <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">
+            PARTNERSHIP
+          </p>
           <h2 className="text-4xl font-bold text-gray-800">
             Trusted by <span className="font-light text-gray-700">Our Partners</span>
           </h2>
@@ -29,14 +31,25 @@ export default function PartnersSection() {
 
         <div className="overflow-hidden relative">
           <div className="flex animate-scroll whitespace-nowrap gap-16">
-            {partners.concat(partners).map((src, index) => (
-              <div key={index} className="relative w-32 h-16 flex-shrink-0">
-                <Image
-                  src={src}
-                  alt={`partner-${index}`}
-                  fill
-                  className="object-contain"
-                />
+            {[...partners, ...partners].map((partner, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center justify-center w-40 flex-shrink-0"
+              >
+                <div className="relative w-32 h-16">
+                  <Image
+                    src={partner.src}
+                    alt={`partner-${index}`}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <p
+                  className="text-[12px] mt-2 font-light"
+                  style={{ color: partner.color }}
+                >
+                  {partner.label}
+                </p>
               </div>
             ))}
           </div>
@@ -45,8 +58,12 @@ export default function PartnersSection() {
 
       <style jsx>{`
         @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
         }
 
         .animate-scroll {

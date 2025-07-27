@@ -7,19 +7,19 @@ const reasons = [
     title: "Experienced & Trained Staff",
     image: "https://images.pexels.com/photos/8547341/pexels-photo-8547341.jpeg",
     description:
-      "Our experienced staff is trained to provide high-quality client relation services tailored to meet each client's specific needs.",
+      "Our experience staff is trained to provide quality Client relation service tailored to the need of the client.",
   },
   {
     title: "Client-Centered Approach",
     image: "https://images.pexels.com/photos/8867252/pexels-photo-8867252.jpeg",
     description:
-      "We understand every client is unique. We strive to understand the goals of each service and deliver personalized support to help achieve the client’s objectives.",
+      "We understand each client is unique, we strive to understand the goals of the required service and deliver a personalized service that will help achieve Client's need or objective.",
   },
   {
     title: "Multilingual Communication",
     image: "https://images.pexels.com/photos/9487622/pexels-photo-9487622.jpeg",
     description:
-      "Our team includes multilingual staff fluent in major United Nations languages, ensuring smooth and effective communication with clients from diverse backgrounds.",
+      "Our team composed of multilingual staffs that are fluent in major United Nations Languages hence they can easily connect with Clients they are attending to.",
   },
 ];
 
@@ -64,7 +64,7 @@ export default function WhyUsPage() {
           <div className="mb-6">
             <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Why Choose</p>
             <h2 className="text-4xl font-bold text-gray-800">
-              PALOTEM <span className="font-light text-gray-700">Sarl</span>
+              Société Palotem<span className="font-light text-gray-700">Sarl</span>
             </h2>
             <div className="mt-4 w-12 h-1 rounded bg-orange-500" />
           </div>

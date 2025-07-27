@@ -27,17 +27,17 @@ export default function AboutPage() {
 
         <div className="w-20 h-1 bg-orange-500 rounded"></div>
         <p className="text-gray-600 text-sm font-light leading-relaxed">
-            PALOTEM Sarl est une entreprise congolaise fondée en 2015 par M. Michel Kadakala Mudesa Sangara. Active dans
+            Société Palotem Sarl est une entreprise congolaise fondée en 2015 par M. Michel Kadakala Mudesa Sangara. Active dans
             plusieurs domaines stratégiques, elle développe ses activités en RDC et à l’étranger avec une vision ambitieuse
             et une éthique fondée sur l’intégrité et la performance.
             Notre expertise couvre le commerce général, l’import-export, les produits agricoles, les matériaux de construction,
             le génie civil, les énergies et les services logistiques. Présente à Goma, Lubumbashi, Kinshasa, Bukavu, Kampala et
-            Hong Kong, PALOTEM Sarl est aujourd’hui un acteur majeur du développement économique et social.
+            Hong Kong, Société Palotem Sarl est aujourd’hui un acteur majeur du développement économique et social.
 
         </p>
 
         <blockquote className="border-l-4 pl-4 font-medium text-sm border-gray-200 text-gray-500 py-2">
-          PALOTEM pour dire « la Patience est la Longueur du Temps » est une société unipersonnelle régie par l’Acte uniforme
+          Société Palotem Sarl pour dire « la Patience est la Longueur du Temps » est une société unipersonnelle régie par l’Acte uniforme
           relative au droit des activités commerciales et du groupement d’intérêt économique ayant pour objet acheter et vendre...,
           importer et exporter mais aussi, rentrer dans toutes les activités de nature à favoriser son développement pourvu
           que ça cadre avec son objet social.

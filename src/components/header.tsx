@@ -1,32 +1,35 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
-import { Menu, X, ArrowRight } from "lucide-react"
-import Image from "next/image"
-import { AnimatePresence, motion } from "framer-motion"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Menu, X, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import LanguageSwitcher from "./LanguageSwitcher"; // Assure-toi que le chemin est correct
 
 const navItems = [
   { label: "ACCUEIL", href: "/" },
   { label: "À PROPOS", href: "/about" },
   { label: "SERVICES", href: "/service" },
+  { label: "PRODUCT", href: "/product" },
+  { label: "BLOG", href: "/blog" },
   { label: "CONTACT", href: "/contact" },
-]
+];
 
 export default function Header() {
-  const pathname = usePathname()
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
+      setScrolled(window.scrollY > 10);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header
@@ -50,7 +53,7 @@ export default function Header() {
                 scrolled ? "text-gray-800" : "text-white"
               }`}
             >
-              Palotem Sarl
+              Société Palotem Sarl
             </span>
           </Link>
 
@@ -71,6 +74,12 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+
+            {/* Language Switcher Desktop */}
+            <div className="ml-4">
+              <LanguageSwitcher />
+            </div>
+
             <Link
               href="/quote"
               className={`ml-4 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200 ${
@@ -84,16 +93,17 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Menu Hamburger */}
+          {/* Menu bouton (mobile) */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
             className={`md:hidden p-2 transition-all duration-300 ${
               scrolled
-                ? 'bg-white text-orange-600 border border-orange-600'
-                : 'bg-orange-600 text-white'
-            }`}>
+                ? "bg-white text-orange-600 border border-orange-600"
+                : "bg-orange-600 text-white"
+            }`}
+          >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
@@ -121,14 +131,17 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+
+            {/* Language Switcher Mobile */}
+            <div className="flex justify-center">
+              <LanguageSwitcher />
+            </div>
+
             <Link
               href="/quote"
-              className={`ml-4 hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200 ${
-                scrolled
-                  ? "bg-orange-600 text-white hover:bg-gray-100 hover:text-orange-600"
-                  : "bg-orange-600 text-white hover:bg-orange-600/20"
-              }`}
-              >
+              onClick={() => setMenuOpen(false)}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-orange-600 text-white text-sm font-semibold hover:bg-orange-500 transition mx-auto"
+            >
               Get a quote
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -136,5 +149,5 @@ export default function Header() {
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }
