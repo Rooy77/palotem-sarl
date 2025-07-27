@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 
-// Fonction locale pour comparer les slugs
+// Fonction locale pour créer un slug propre
 function slugifyLocal(str: string): string {
   return str
     .normalize("NFD")
@@ -31,7 +31,13 @@ type Props = {
   params: { slug: string };
 };
 
-export default function ProductPage({ params }: Props) {
+export async function generateStaticParams() {
+  return products.map((product) => ({
+    slug: slugifyLocal(product.name),
+  }));
+}
+
+export default async function ProductPage({ params }: Props) {
   const product = products.find(
     (p) => slugifyLocal(p.name) === params.slug
   );
