@@ -39,7 +39,7 @@ export default function BlogPage() {
             {/* Text Content */}
           <div className="text-center mb-12">
             <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Services</p>
-            <h2 className="text-4xl font-bold text-gray-800">
+            <h2 className="text-3xl font-bold text-gray-800">
               Society PALOREM Sarl<br /> <span className="font-light text-gray-700">We are competent</span>
             </h2>
             <div className="mt-4 w-12 h-1 rounded bg-orange-500 mx-auto" />
