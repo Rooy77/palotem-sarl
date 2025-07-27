@@ -24,7 +24,6 @@ const products: Product[] = [
   { name: "Fer à béton", image: "/img/glod.jpg", description: "Fer à béton pour infrastructures durables.", category: "Matériaux de construction" },
 ];
 
-// Même fonction que dans la page principale
 function slugifyLocal(str: string): string {
   return str
     .normalize("NFD")
@@ -36,7 +35,11 @@ function slugifyLocal(str: string): string {
     .replace(/-+/g, "-");
 }
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+type PageProps = {
+  params: { slug: string };
+};
+
+export default function ProductPage({ params }: PageProps) {
   const product = products.find(
     (p) => slugifyLocal(p.name) === params.slug
   );
