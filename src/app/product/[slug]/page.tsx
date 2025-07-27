@@ -49,7 +49,7 @@ export default function ProductPage({ params }: Props) {
         height={500}
         className="rounded-xl mb-6"
       />
-      <p className="text-lg text-gray-700">{product.description}</p>
+      <p className="text-xl text-gray-700">{product.description}</p>
     </div>
   );
 }
