@@ -1,28 +1,8 @@
 import Link from "next/link";
-import { Gem, Bolt, Coins } from "lucide-react";
 import Mining from "@/components/MiningSection"
 import Image from "next/image";
 
-const services = [
-  {
-    title: "Import – Export",
-    description:
-      "Nous assurons l’importation et l’exportation de produits agricoles (café, cacao, huile, tournesol), matériaux de construction, pièces détachées, vivres frais, vêtements (friperie), etc.",
-    icon: <Bolt className="text-orange-500 w-6 h-6" />, 
-  },
-  {
-    title: "Génie civil & Construction",
-    description:
-      "Notre département réalise des projets de construction, réhabilitation d’infrastructures, voiries, bâtiments publics et privés. Nous fournissons également des expertises immobilières et accompagnons les investissements immobiliers.",
-    icon: <Gem className="text-orange-500 w-6 h-6" />,
-  },
-  {
-    title: "Logistique & Transport",
-    description:
-      "ONous proposons des services de transport de marchandises, fret national et international, gestion de stock, entreposage et distribution. Nous travaillons avec les meilleurs réseaux logistiques pour garantir la fiabilité.",
-    icon: <Coins className="text-orange-500 w-6 h-6" />,
-  },
-];
+
 export default function BlogPage() {
   return (
     <section>
@@ -68,19 +48,19 @@ export default function BlogPage() {
             </p>
           </div>
             <div className="grid md:grid-cols-3 gap-8">
-              {services.map((service, index) => (
-                <div key={index} className="p-4">
+              
+                <div  className="p-4">
                   <div className="flex items-start mt-4 space-x-3">
-                    <div className="mt-1">{service.icon}</div>
+                    <div className="mt-1">jnjdejnde</div>
                     <div>
                       <h3 className="text-lg font-medium text-gray-900">
-                        {service.title}
+                        danen
                       </h3>
-                      <p className="mt-2 text-gray-600 font-light text-sm">{service.description}</p>
+                      <p className="mt-2 text-gray-600 font-light text-sm">jnfjenjfe</p>
                     </div>
                   </div>
                 </div>
-              ))}
+             
             </div>
           </section>
           <br />
