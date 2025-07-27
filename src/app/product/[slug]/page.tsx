@@ -14,17 +14,22 @@ function slugifyLocal(str: string): string {
 }
 
 const products = [
-  { name: "Copper Cathods", image: "/images/mining/copper.jpg", description: "Cuivre raffiné pour diverses industries.", category: "Produits miniers" },
-  { name: "Or", image: "/images/mining/gold.jpg", description: "Or pur pour l’exportation et l’investissement.", category: "Produits miniers" },
-  { name: "Diamant", image: "/images/mining/diamond.jpg", description: "Diamants bruts de qualité exceptionnelle.", category: "Produits miniers" },
-  { name: "Mahogany", image: "/images/wood/mahogany.jpg", description: "Bois précieux pour meubles et décoration.", category: "Arbres rares" },
-  { name: "Iroko", image: "/images/wood/iroko.jpg", description: "Alternative durable au teck.", category: "Arbres rares" },
-  { name: "Sapelli", image: "/images/wood/sapelli.jpg", description: "Bois africain très prisé pour l’ameublement.", category: "Arbres rares" },
-  { name: "Café", image: "/images/agriculture/cafe.jpg", description: "Café Arabica de haute altitude.", category: "Produits Agricoles" },
-  { name: "Cacao", image: "/images/agriculture/cacao.jpg", description: "Cacao brut pour l’industrie chocolatière.", category: "Produits Agricoles" },
-  { name: "Huile", image: "/images/agriculture/huile.jpg", description: "Huile végétale naturelle et bio.", category: "Produits Agricoles" },
-  { name: "Ciment", image: "/images/construction/ciment.jpg", description: "Ciment de qualité supérieure.", category: "Matériaux de construction" },
-  { name: "Fer à béton", image: "/images/construction/fer.jpg", description: "Fer à béton pour infrastructures durables.", category: "Matériaux de construction" },
+    {
+        name: "Copper Cathods",
+        image: "/img/glod.jpg",
+        description: "Cuivre raffiné pour diverses industries.",
+        category: "Produits miniers"
+    },
+    { name: "Or", image: "/img/glod.jpg", description: "Or pur pour l’exportation et l’investissement.", category: "Produits miniers" },
+    { name: "Diamant", image: "/img/glod.jpg", description: "Diamants bruts de qualité exceptionnelle.", category: "Produits miniers" },
+    { name: "Mahogany", image: "/img/glod.jpg", description: "Bois précieux pour meubles et décoration.", category: "Arbres rares" },
+    { name: "Iroko", image: "/img/glod.jpg", description: "Alternative durable au teck.", category: "Arbres rares" },
+    { name: "Sapelli", image: "/img/glod.jpg", description: "Bois africain très prisé pour l’ameublement.", category: "Arbres rares" },
+    { name: "Café", image: "/img/glod.jpg", description: "Café Arabica de haute altitude.", category: "Produits Agricoles" },
+    { name: "Cacao", image: "/img/glod.jpg", description: "Cacao brut pour l’industrie chocolatière.", category: "Produits Agricoles" },
+    { name: "Huile", image: "/img/glod.jpg", description: "Huile végétale naturelle et bio.", category: "Produits Agricoles" },
+    { name: "Ciment", image: "/img/glod.jpg", description: "Ciment de qualité supérieure.", category: "Matériaux de construction" },
+    { name: "Fer à béton", image: "/img/glod.jpg", description: "Fer à béton pour infrastructures durables.", category: "Matériaux de construction" },
 ];
 
 export async function generateStaticParams() {
