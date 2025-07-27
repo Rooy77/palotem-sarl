@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { type PageProps } from "next";
 import Image from "next/image";
 
 // Fonction locale pour créer un slug propre
@@ -38,7 +39,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
+export default async function ProductPage({ params }: PageProps<{ slug: string }>) {
   const product = products.find(
     (p) => slugifyLocal(p.name) === params.slug
   );
