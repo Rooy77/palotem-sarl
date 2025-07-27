@@ -64,7 +64,7 @@ export default function WhyUsPage() {
           <div className="mb-6">
             <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Why Choose</p>
             <h2 className="text-4xl font-bold text-gray-800">
-              Société Palotem<span className="font-light text-gray-700">Sarl</span>
+              Société Palotem <span className="font-light text-gray-700">Sarl</span>
             </h2>
             <div className="mt-4 w-12 h-1 rounded bg-orange-500" />
           </div>

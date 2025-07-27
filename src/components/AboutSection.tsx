@@ -2,6 +2,7 @@ import Image from "next/image"
 
 import Aboutsuite from "@/components/AbouteSuite";
 
+
 export default function AboutPage() {
   return (
     <section className="max-w-6xl mx-auto px-4 py-16">
@@ -46,6 +47,7 @@ export default function AboutPage() {
       </div>
       </div>
       <Aboutsuite />
+      
     </section>
   )
 }

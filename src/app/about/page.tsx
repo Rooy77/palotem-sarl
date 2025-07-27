@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react"
 import Team from "@/components/team";
+import Corevalue from "@/components/CoreValue";
+import BusinessM from "@/components/BusinessM";
+import Mining from "@/components/MiningSection"
 
 import Image from "next/image";
 
@@ -92,6 +95,11 @@ export default function AboutPage() {
           </section> <br />
           <Aboutsuite/>
           <br />
+          <Corevalue />
+          <BusinessM />
+      </div>
+      <div className="border-b border-gray-300/50">
+        <Mining />
       </div>
       <Team />
     </section>
