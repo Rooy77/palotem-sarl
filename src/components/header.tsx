@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import LanguageSwitcher from "./LanguageSwitcher"; // Assure-toi que le chemin est correct
+ // Assure-toi que le chemin est correct
 
 const navItems = [
   { label: "ACCUEIL", href: "/" },
@@ -76,9 +76,6 @@ export default function Header() {
             ))}
 
             {/* Language Switcher Desktop */}
-            <div className="ml-4">
-              <LanguageSwitcher />
-            </div>
 
             <Link
               href="/quote"
@@ -133,10 +130,6 @@ export default function Header() {
             ))}
 
             {/* Language Switcher Mobile */}
-            <div className="flex justify-center">
-              <LanguageSwitcher />
-            </div>
-
             <Link
               href="/quote"
               onClick={() => setMenuOpen(false)}
