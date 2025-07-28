@@ -128,7 +128,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div>
+        <div className="border-t-1 pt-8 border-gray-800 max-w-m">
           <p className="text-center text-xs text-gray-500">
             &copy; {currentYear} Société Palotem Sarl. {copyright}
           </p>

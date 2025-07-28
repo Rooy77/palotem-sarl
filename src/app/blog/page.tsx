@@ -1,72 +1,38 @@
-import Link from "next/link";
-import Mining from "@/components/MiningSection"
-import Image from "next/image";
+//"use client";
 
+//import { useEffect, useState } from "react";
+//import { getLatestPosts, Post } from "@/lib/posts";
 
-export default function BlogPage() {
-  return (
-    <section>
-      <div className="relative w-full h-[40vh]">
-        <div
-          className="absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-100 z-10"
-        >
-          <Image
-            src="/img/page-title.jpg"
-            fill
-            className="object-cover"
-            sizes="100vw" alt={""}          />
-          <div className="absolute bg-gray-800/30 inset-0 flex items-center justify-left text-white text-center">
-            <div  className="max-w-6xl mx-auto px-4 py-16">
-              <div className="max-w-3xl flex md:text-5xl font-semibold text-xl cursor-pointer">
-                <div className="col col-xs-12">
-                    <h2>Service</h2>
-                    <ol className="text-sm text-center font-light justify-center flex space-x-2">
-                        <li className="text-orange-500">
-                          <Link href="/">
-                            Home
-                          </Link>  &gt;
-                        </li>
-                        <li>Service</li>
-                    </ol>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="max-w-6xl mx-auto px-8 py-16 ">
-          <section className="items-center">
-            {/* Text Content */}
-          <div className="text-center mb-12">
-            <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Services</p>
-            <h2 className="text-3xl font-bold text-gray-800">
-              Society PALOREM Sarl<br /> <span className="font-light text-gray-700">We are competent</span>
-            </h2>
-            <div className="mt-4 w-12 h-1 rounded bg-orange-500 mx-auto" />
-            <p className="mt-6 text-gray-600 text-sm font-light max-w-2xl mx-auto">
-              As a unique entrepreneurial company rooted in the community, Royal Import Export Sarl creates value for stakeholders through an investment strategy that strictly adheres to our Vision, Mission and Values. We strive for excellence to realise the hopes and aspirations of our company and communities.
-            </p>
-          </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              
-                <div  className="p-4">
-                  <div className="flex items-start mt-4 space-x-3">
-                    <div className="mt-1">jnjdejnde</div>
-                    <div>
-                      <h3 className="text-lg font-medium text-gray-900">
-                        danen
-                      </h3>
-                      <p className="mt-2 text-gray-600 font-light text-sm">jnfjenjfe</p>
-                    </div>
-                  </div>
-                </div>
-             
-            </div>
-          </section>
-          <br />
-          <br />
-      </div>
-      <Mining />
-    </section>
-  )
-}
+//export default function LatestNews() {
+//  const [posts, setPosts] = useState<Post[]>([]);
+  //const [loading, setLoading] = useState(true);
+
+//  useEffect(() => {
+//    getLatestPosts()
+ //     .then((posts) => {
+//        setPosts(posts);
+ //       setLoading(false);
+ //     })
+  //    .catch(() => setLoading(false));
+ // }, []);
+
+  //if (loading) return <p>Chargement des actualités...</p>;
+ // if (!posts.length) return <p>Aucune actualité disponible.</p>;
+
+ // return (
+  //  <section className="max-w-4xl mx-auto px-4 py-12">
+   //   <h2 className="text-3xl font-bold mb-8">Latest News</h2>
+    //  <ul className="space-y-6">
+    //    {posts.map((post) => (
+     //     <li key={post.id} className="border-b pb-4">
+      //      <h3 className="text-xl font-semibold">{post.title}</h3>
+     //       <p className="text-gray-700">{post.content}</p>
+     //       <p className="text-gray-400 text-sm mt-1">
+      //        Publié le {post.createdAt.toLocaleDateString()}
+      //      </p>
+    //      </li>
+    //    ))}
+  //    </ul>
+  //  </section>
+//  );
+//}

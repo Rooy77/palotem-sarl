@@ -27,9 +27,7 @@ export default function ServicesPage() {
   return (
     <section>
       <div className="relative w-full h-[40vh]">
-        <div
-          className="absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-100 z-10"
-        >
+        <div className="absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-100 z-10">
           <Image
             src="/img/page-title.jpg"
             fill

@@ -1,21 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-// Fonction locale pour créer un slug propre
-function slugifyLocal(str: string): string {
-  return str
-    .normalize("NFD") // décompose les lettres accentuées
-    .replace(/[\u0300-\u036f]/g, "") // supprime les accents
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9 -]/g, "") // supprime caractères spéciaux
-    .replace(/\s+/g, "-") // remplace espaces par tirets
-    .replace(/-+/g, "-"); // supprime tirets doublés
-}
 
 type Product = {
   name: string;
@@ -25,76 +13,175 @@ type Product = {
 };
 
 const products: Product[] = [
-    {
-        name: "Copper Cathods",
+    { 
+        name: "Copper Cathods", 
         image: "/img/glod.jpg",
-        description: "Cuivre raffiné pour diverses industries.",
-        category: "Produits miniers"
+        description: "Cuivre raffiné pour diverses industries. Cuivre raffiné pour diverses industries.",
+        category: "Produits miniers" 
     },
-  { name: "Or", image: "/img/glod.jpg", description: "Or pur pour l’exportation et l’investissement.", category: "Produits miniers" },
-  { name: "Diamant", image: "/img/glod.jpg", description: "Diamants bruts de qualité exceptionnelle.", category: "Produits miniers" },
-  { name: "Mahogany", image: "/img/glod.jpg", description: "Bois précieux pour meubles et décoration.", category: "Arbres rares" },
-  { name: "Iroko", image: "/img/glod.jpg", description: "Alternative durable au teck.", category: "Arbres rares" },
-  { name: "Sapelli", image: "/img/glod.jpg", description: "Bois africain très prisé pour l’ameublement.", category: "Arbres rares" },
-  { name: "Café", image: "/img/glod.jpg", description: "Café Arabica de haute altitude.", category: "Produits Agricoles" },
-  { name: "Cacao", image: "/img/glod.jpg", description: "Cacao brut pour l’industrie chocolatière.", category: "Produits Agricoles" },
-  { name: "Huile", image: "/img/glod.jpg", description: "Huile végétale naturelle et bio.", category: "Produits Agricoles" },
-  { name: "Ciment", image: "/img/glod.jpg", description: "Ciment de qualité supérieure.", category: "Matériaux de construction" },
-  { name: "Fer à béton", image: "/img/glod.jpg", description: "Fer à béton pour infrastructures durables.", category: "Matériaux de construction" },
+    { 
+        name: "Or", image: "/img/glod.jpg",
+        description: "Or pur pour l’exportation et l’investissement. l’investissement.",
+        category: "Produits miniers" },
+    { 
+        name: "Diamant",
+        image: "/img/glod.jpg", 
+        description: "Diamants bruts de qualité exceptionnelle Cuivre raffiné pour diverses industries.", 
+        category: "Produits miniers" 
+    },
+    { 
+        name: "Mahogany", 
+        image: "/img/glod.jpg", 
+        description: "Bois précieux pour meubles et décoration. Cuivre raffiné pour diverses industries", 
+        category: "Arbres rares" 
+    },
+    { 
+        name: "Iroko", 
+        image: "/img/glod.jpg", 
+        description: "Alternative durable au teck. Cuivre raffiné pour diverses industries", 
+        category: "Arbres rares" },
+    { 
+        name: "Sapelli", 
+        image: "/img/glod.jpg", 
+        description: "Bois africain très prisé pour l’ameublement. Cuivre raffiné pour diverses industries", 
+        category: "Arbres rares" 
+    },
+    { 
+        name: "Café", 
+        image: "/img/glod.jpg", 
+        description: "Café Arabica de haute altitude. Café Arabica de haute altitude.", 
+        category: "Produits Agricoles" 
+    },
+    { 
+        name: "Cacao",
+        image: "/img/glod.jpg",
+        description: "Cacao brut pour l’industrie chocolatière. Cacao brut pour l’industrie chocolatière.",
+        category: "Produits Agricoles" 
+    },
+    { 
+        name: "Huile",
+        image: "/img/glod.jpg", 
+        description: "Huile végétale naturelle et bio. Huile végétale naturelle et bio.", 
+        category: "Produits Agricoles" 
+    },
+    { 
+        name: "Ciment", 
+        image: "/img/glod.jpg", 
+        description: "Ciment de qualité supérieure Ciment de qualité supérieure. Ciment de qualité supérieure", 
+        category: "Matériaux de construction" 
+    },
+    { 
+        name: "Fer à béton", 
+        image: "/img/glod.jpg", 
+        description: "Fer à béton pour infrastructures durables. Fer à béton pour infrastructures durables. Fer à béton pour infrastructures durables.", 
+        category: "Matériaux de construction" 
+    },
+    { 
+        name: "Fer à boit", 
+        image: "/img/glod.jpg", 
+        description: "Fer à béton pour infrastructures durables. Fer à béton pour infrastructures durables. Fer à béton pour infrastructures durables.", 
+        category: "Matériaux de construction" 
+    },
 ];
 
-const ITEMS_PER_PAGE = 6;
-
-export default function Produits() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
-
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const visibleProducts = products.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+export default function ProductPage() {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   return (
-    <div className="px-4 md:px-20 py-12">
-      <h1 className="text-3xl font-bold mb-8 text-center">Nos Produits</h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-        {visibleProducts.map((product) => {
-          const slug = slugifyLocal(product.name);
-          return (
-            <div key={product.name} className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition">
-              <Image src={product.image} alt={product.name} width={400} height={250} className="w-full h-48 object-cover" />
-              <div className="p-4">
-                <h3 className="text-lg font-bold">{product.name}</h3>
-                <p className="text-sm text-gray-600">{product.description}</p>
-                <Link href={`/product/${slug}`}>
-                  <button className="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                    En savoir plus
-                  </button>
-                </Link>
-              </div>
+    <section>
+        <div className="relative w-full h-[40vh]">
+            <div className="absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-100 z-10">
+                <Image
+                src="/img/page-title.jpg"
+                fill
+                className="object-cover"
+                sizes="100vw" alt={""}          />
+                <div className="absolute bg-gray-800/30 inset-0 flex items-center justify-left text-white text-center">
+                    <div  className="max-w-6xl mx-auto px-4 py-16">
+                        <div className="max-w-3xl flex md:text-5xl font-semibold text-xl cursor-pointer">
+                            <div className="col col-xs-12">
+                                <h2>Our Products</h2>
+                                <ol className="text-sm text-center font-light justify-center flex space-x-2">
+                                    <li className="text-orange-500"><a href="#">Home</a> {'>'}</li>
+                                    <li>Product</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          );
-        })}
-      </div>
+        </div>
+        <div className="max-w-6xl mx-auto px-8 py-16">
+            <div className="text-center mb-12">
+                <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">product</p>
+                <h2 className="text-4xl font-bold text-gray-800">
+                    Society PALOREM Sarl<br /> <span className="font-light text-gray-700">our products</span>
+                </h2>
+                <div className="mt-4 w-12 h-1 rounded bg-orange-500 mx-auto" />
+                <p className="mt-6 text-gray-600 text-sm font-light max-w-2xl mx-auto">
+                    As a unique entrepreneurial company rooted in the community, Royal Import Export Sarl creates value for stakeholders through an investment strategy.
+                </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+                {products.map((product) => (
+                    <div
+                        key={product.name}
+                        className="bg-white shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer"
+                        onClick={() => setSelectedProduct(product)}
+                        >
+                        <Image src={product.image} alt={product.name} width={400} height={250} className="w-full h-48 object-cover" />
+                        <div className="p-4">
+                        <h3 className="text-[20px] font-medium text-gray-700">{product.name}</h3>
+                        <div className="border-b-[2px] mt-2 border-orange-500 max-w-max text-left">
+                            <p className="text-[11.5px] font-medium text-orange-500">{product.category}</p>
+                        </div>
+                            <p className="mt-4 text-gray-600 text-[13px] font-light max-w-2xl mx-auto">{product.description}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
-      <div className="flex justify-center items-center gap-4">
-        <button
-          onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-          disabled={currentPage === 1}
-          className="p-2 bg-gray-400 rounded hover:bg-gray-400 disabled:opacity-50"
-          aria-label="Page précédente"
-        >
-          <ChevronLeft size={24} />
-        </button>
-        <span>Page {currentPage} sur {totalPages}</span>
-        <button
-          onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-          disabled={currentPage === totalPages}
-          className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-          aria-label="Page suivante"
-        >
-          <ChevronRight size={24} />
-        </button>
-      </div>
-    </div>
+            {/* Modal */}
+            <AnimatePresence>
+                {selectedProduct && (
+                <motion.div
+                    className="fixed inset-0 bg-black/80 bg-opacity-50 flex items-center justify-center z-50"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setSelectedProduct(null)}
+                    >
+                    <motion.div
+                    className="bg-white max-w-lg w-full p-6 relative"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    onClick={(e) => e.stopPropagation()} // stop propagation pour ne pas fermer au clic dans la modale
+                    >
+                        <button
+                            onClick={() => setSelectedProduct(null)}
+                            className="absolute top-6 right-6 text-gray-100 hover:text-orange-500 hover:bg-white hover:border-orange-500 hover:border-1 font-normal text-2xl bg-orange-500 h-8 w-8 transition cursor-pointer"
+                            aria-label="Close"
+                        >
+                            ×
+                        </button>
+                        <h2 className="text-[24px] font-medium text-gray-700 mb-4">{selectedProduct.name}</h2>
+                        <Image
+                            src={selectedProduct.image}
+                            alt={selectedProduct.name}
+                            width={600}
+                            height={400}
+                            className=" mb-4 object-cover w-full"
+                        />
+                        <p className="text-gray-700 mb-2 text-[15px]">
+                            <strong>Catégorie:</strong> <span className=" border-b-[2px] mt-2 border-orange-500 max-w-max text-left text-orange-500">{selectedProduct.category}</span>
+                        </p>
+                        <p className="mt-4 text-gray-600 text-[14px] font-light max-w-2xl mx-auto">{selectedProduct.description}</p>
+                    </motion.div>
+                </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    </section>
   );
 }

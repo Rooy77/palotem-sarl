@@ -181,7 +181,7 @@ export default function ContactSection() {
                   <p className="text-sm font-light text-muted-foreground hover:text-primary transition-colors break-all">
                     <span className="font-medium">Adresse siège : </span>Goma, 03 Av. de la Frontière, Q. Katindo <br />
                     <span className="font-medium">Bureau L&apos;shi : </span> 96 Av. du Cadastre, Q. Salama, C. L&apos;shi <br />
-                    <span className="font-medium">Adresse :</span> Lubumbashi-Goma-Bukavu-Kinshasa/RD. Congo
+                    <span className="font-medium">Adresse :</span> Lubumbashi • Goma • Bukavu • Kinshasa / RD. Congo
                   </p>
                 </div>
               </div>
