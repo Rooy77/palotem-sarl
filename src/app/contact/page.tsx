@@ -1,57 +1,8 @@
 'use client'
-
-import { useState } from "react";
 import Image from "next/image";
+import ContactF from "@/components/contactF";
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: ""
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-
-      console.log('Response status:', res.status);
-
-      if (!res.ok) {
-        const text = await res.text();
-        console.error('Erreur API:', text);
-        alert("Erreur serveur : " + text);
-        return;
-      }
-
-      await res.json();
-      alert("Message envoyé avec succès !");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: ""
-      });
-    } catch (err) {
-      alert("Erreur réseau");
-      console.error(err);
-    }
-  };
 
   return (
     <section>
@@ -87,66 +38,7 @@ export default function ContactSection() {
             <p className="text-gray-600 text-5xl mb-6 barlow-condensed-medium">
               <span className="barlow-condensed-light"> You can </span> contact us, <br /> if you have any query.
             </p>
-
-            <form className="grid gap-4" onSubmit={handleSubmit}>
-              <div className="flex gap-4">
-                <input
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="Name"
-                  className="border border-gray-300 px-4 py-2 text-gray-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  required
-                />
-                <input
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  type="email"
-                  placeholder="Email"
-                  className="border w-full border-gray-300 px-4 py-2 text-gray-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  required
-                />
-              </div>
-
-              <div className="flex gap-4">
-                <input
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  type="tel"
-                  placeholder="Phone"
-                  className="border w-full border-gray-300 px-4 py-2 text-gray-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-                <input
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="Contact Subject"
-                  className="border border-gray-300 px-4 py-2 text-gray-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  required
-                />
-              </div>
-
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows={5}
-                placeholder="Case Description"
-                className="border border-gray-300 px-4 py-2 text-gray-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-orange-500"
-                required
-              />
-
-              <button
-                type="submit"
-                className="bg-orange-500 text-white text-sm font-medium py-2 px-6 hover:bg-orange-600 transition"
-              >
-                Send Message
-              </button>
-            </form>
+            <ContactF />
           </div>
 
           <div className="space-y-4 sm:space-y-5">

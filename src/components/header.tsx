@@ -9,10 +9,10 @@ import { AnimatePresence, motion } from "framer-motion";
  // Assure-toi que le chemin est correct
 
 const navItems = [
-  { label: "HOME", href: "/" },
-  { label: "ABOUTS", href: "/about" },
+  { label: "ACCUEIL", href: "/" },
+  { label: "A PROPOS", href: "/about" },
   { label: "SERVICE", href: "/service" },
-  { label: "PRODUCT", href: "/product" },
+  { label: "PRODUIT", href: "/product" },
   { label: "BLOG", href: "/blog" },
   { label: "CONTACT", href: "/contact" },
 ];

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-
+import ContactF from "@/components/contactF";
 export default function Contact() {
   return (
     <section className="bg-white py-16">
@@ -30,43 +30,7 @@ export default function Contact() {
           <p className="text-gray-600 text-5xl mb-6 barlow-condensed-medium">
             <span className="barlow-condensed-light"> You can </span> contact us, <br /> if you have any query.
           </p>
-          <form className="grid gap-4">
-            <div className="flex gap-4">
-                <input
-                    type="text"
-                    placeholder="Name"
-                    className="border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    className="border w-full border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-            </div>
-            <div className="flex gap-4">
-                <input
-                    type="tel"
-                    placeholder="Phone"
-                    className="border w-full border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-                <input
-                    type="text"
-                    placeholder="Contact Subject"
-                    className="border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-            </div>
-            <textarea
-              rows={5}
-              placeholder="Case Description"
-              className="border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-            ></textarea>
-            <button
-              type="submit"
-              className="bg-orange-500 text-white font-semibold py-2 px-6 hover:bg-orange-600 transition"
-            >
-              Send Message
-            </button>
-          </form>
+          <ContactF />
         </div>
       </div>
     </section>

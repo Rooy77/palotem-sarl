@@ -1,47 +1,41 @@
-import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
-type ContactForm = {
-  name: string;
-  email: string;
-  phone: string;
-  subject: string;
-  message: string;
-};
+export async function POST(request: Request) {
+  const { name, email, phone, subject, message } = await request.json();
 
-export async function POST(req: Request) {
-  const data: ContactForm = await req.json();
-
+  // Configuration du transporteur Gmail
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASS
-    }
+      user: process.env.GMAIL_EMAIL,
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
   });
 
-  const mailOptions = {
-    from: `"Site Contact" <${process.env.MAIL_USER}>`,
-    to: process.env.MAIL_USER,
-    subject: `Message de ${data.name} - ${data.subject}`,
-    html: `
-      <p><strong>Nom :</strong> ${data.name}</p>
-      <p><strong>Email :</strong> ${data.email}</p>
-      <p><strong>Téléphone :</strong> ${data.phone}</p>
-      <p><strong>Sujet :</strong> ${data.subject}</p>
-      <p><strong>Message :</strong><br />${data.message}</p>
-    `
-  };
-  
   try {
-    await transporter.sendMail(mailOptions);
+    // Envoi de l'email
+    await transporter.sendMail({
+      from: `"Contact Form" <${process.env.GMAIL_EMAIL}>`,
+      to: process.env.CONTACT_RECEIVER_EMAIL || process.env.GMAIL_EMAIL,
+      subject: `New Contact: ${subject}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `,
+    });
+
     return NextResponse.json({ success: true });
-  } catch (err: unknown) {
-  if (err instanceof Error) {
-    console.error(err.message);
-  } else {
-    console.error("Erreur inconnue :", err);
+  } catch (error) {
+    console.error('Email sending error:', error);
+    return NextResponse.json(
+      { error: "Failed to send message" },
+      { status: 500 }
+    );
   }
-  return NextResponse.json({ error: 'Échec de l’envoi' }, { status: 500 });
-}
 }
