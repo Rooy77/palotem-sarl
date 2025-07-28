@@ -21,7 +21,7 @@ const products: Product[] = [
     },
     { 
         name: "Or",
-        image: "/img/products/Or.jpg",
+        image: "/img/products/or.jpg",
         description: "Or pur pour l’exportation et l’investissement. l’investissement.",
         category: "Produits miniers" },
     { 
