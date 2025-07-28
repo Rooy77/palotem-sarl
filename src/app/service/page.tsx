@@ -14,7 +14,7 @@ const services = [
     title: "Génie civil & Construction",
     description:
       "Notre département réalise des projets de construction, réhabilitation d’infrastructures, voiries, bâtiments publics et privés. Nous fournissons également des expertises immobilières et accompagnons les investissements immobiliers.",
-    icon: <Gem className="text-orange-500 w-6 h-6" />,
+    icon: <Gem className="text-orange-500 w-5 h-6" />,
   },
   {
     title: "Logistique & Transport",
