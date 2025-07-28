@@ -15,70 +15,71 @@ type Product = {
 const products: Product[] = [
     { 
         name: "Copper Cathods", 
-        image: "/img/glod.jpg",
+        image: "/img/products/Cuivre.jpg",
         description: "Cuivre raffiné pour diverses industries. Cuivre raffiné pour diverses industries.",
         category: "Produits miniers" 
     },
     { 
-        name: "Or", image: "/img/glod.jpg",
+        name: "Or",
+        image: "/img/products/Or.jpg",
         description: "Or pur pour l’exportation et l’investissement. l’investissement.",
         category: "Produits miniers" },
     { 
         name: "Diamant",
-        image: "/img/glod.jpg", 
+        image: "/img/products/diamant.jpg", 
         description: "Diamants bruts de qualité exceptionnelle Cuivre raffiné pour diverses industries.", 
         category: "Produits miniers" 
     },
     { 
         name: "Mahogany", 
-        image: "/img/glod.jpg", 
+        image: "/img/products/Mahogany.jpg", 
         description: "Bois précieux pour meubles et décoration. Cuivre raffiné pour diverses industries", 
         category: "Arbres rares" 
     },
     { 
         name: "Iroko", 
-        image: "/img/glod.jpg", 
+        image: "/img/products/Iroko.jpg", 
         description: "Alternative durable au teck. Cuivre raffiné pour diverses industries", 
         category: "Arbres rares" },
     { 
         name: "Sapelli", 
-        image: "/img/glod.jpg", 
+        image: "/img/products/Sapelli.jpg", 
         description: "Bois africain très prisé pour l’ameublement. Cuivre raffiné pour diverses industries", 
         category: "Arbres rares" 
     },
     { 
         name: "Café", 
-        image: "/img/glod.jpg", 
+        image: "/img/products/Café.jpeg", 
         description: "Café Arabica de haute altitude. Café Arabica de haute altitude.", 
         category: "Produits Agricoles" 
     },
     { 
         name: "Cacao",
-        image: "/img/glod.jpg",
+        image: "/img/products/Cacao.jpg",
         description: "Cacao brut pour l’industrie chocolatière. Cacao brut pour l’industrie chocolatière.",
         category: "Produits Agricoles" 
     },
     { 
         name: "Huile",
-        image: "/img/glod.jpg", 
+        image: "/img/products/Huile.jpg", 
         description: "Huile végétale naturelle et bio. Huile végétale naturelle et bio.", 
         category: "Produits Agricoles" 
     },
     { 
         name: "Ciment", 
-        image: "/img/glod.jpg", 
+        image: "/img/products/Ciment.jpg", 
         description: "Ciment de qualité supérieure Ciment de qualité supérieure. Ciment de qualité supérieure", 
         category: "Matériaux de construction" 
     },
     { 
         name: "Fer à béton", 
-        image: "/img/glod.jpg", 
+        image: "/img/products/fer.jpg", 
         description: "Fer à béton pour infrastructures durables. Fer à béton pour infrastructures durables. Fer à béton pour infrastructures durables.", 
         category: "Matériaux de construction" 
     },
     { 
-        name: "Fer à boit", 
-        image: "/img/glod.jpg", 
+        name: "Materiaux outils", 
+        image: "/img/products/all.jpeg", 
         description: "Fer à béton pour infrastructures durables. Fer à béton pour infrastructures durables. Fer à béton pour infrastructures durables.", 
         category: "Matériaux de construction" 
     },
