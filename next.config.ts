@@ -1,6 +1,20 @@
+// next.config.js
 const nextConfig = {
   images: {
-    domains: ["images.unsplash.com", "images.pexels.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com', // pour les images venant de pexel
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com', // pour les images venant de unsplash
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com', // pour les images venant de Cloudinary
+      },
+    ],
   },
 };
 
