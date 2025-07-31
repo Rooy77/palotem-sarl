@@ -1,8 +1,8 @@
-// src/components/UploadImage.tsx
 "use client";
 
 import { CldUploadWidget } from "next-cloudinary";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type Props = {
   onUpload: (url: string) => void;
@@ -26,6 +26,11 @@ export default function UploadImage({ onUpload, resetTrigger }: Props) {
           sources: ["local"],
           maxFiles: 1,
           resourceType: "image",
+          // Configuration recommandée pour Vercel
+          cropping: true,
+          croppingAspectRatio: 16/9,
+          showAdvancedOptions: true,
+          multiple: false,
         }}
         onSuccess={(result) => {
           if (
@@ -46,7 +51,7 @@ export default function UploadImage({ onUpload, resetTrigger }: Props) {
             <button
               type="button"
               onClick={() => open()}
-              className="px-4 py-2 bg-blue-600 text-white rounded"
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
             >
               Upload Image
             </button>
@@ -55,11 +60,27 @@ export default function UploadImage({ onUpload, resetTrigger }: Props) {
       </CldUploadWidget>
 
       {image && (
-        <img
-          src={image}
-          alt="Uploaded"
-          className="mt-4 w-48 h-auto rounded shadow"
-        />
+        <div className="mt-4 w-full max-w-xs">
+          <Image
+            src={image}
+            alt="Uploaded content"
+            width={400}
+            height={225}
+            className="rounded shadow object-cover"
+            priority={false}
+            loading="lazy"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              setImage(null);
+              onUpload("");
+            }}
+            className="mt-2 px-3 py-1 bg-red-500 text-white rounded text-sm hover:bg-red-600 transition-colors"
+          >
+            Remove Image
+          </button>
+        </div>
       )}
     </div>
   );
