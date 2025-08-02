@@ -24,7 +24,7 @@ export default function PartnersSection() {
           </h2>
           <div className="mt-4 w-12 h-1 rounded bg-orange-500 mx-auto" />
           <p className="mt-6 text-gray-600 text-sm font-light max-w-2xl mx-auto">
-            Nous avons établi des partenariats avec plusieurs organisations afin d’offrir un service complet à nos clients.<br />
+            Nous avons établi des partenariats avec plusieurs organisations afin d’offrir un service complet à nos clients.
             Ces organisations comprennent notamment :
           </p>
         </div>
