@@ -49,11 +49,11 @@ export default function Header() {
               className="rounded-full object-cover"
             />
             <span
-              className={`text-2xl font-semibold barlow-condensed-regular transition-colors duration-300 ${
+              className={`text-2xl font-semibold leading-6 barlow-condensed-regular transition-colors duration-300 ${
                 scrolled ? "text-gray-800" : "text-white"
               }`}
             >
-              Société Palotem Sarl
+              Société <br /> Palotem Sarl
             </span>
           </Link>
 
