@@ -17,15 +17,15 @@ export default function PartnersSection() {
       <div className="max-w-6xl mx-auto px-4 text-center">
         <div className="text-center mb-12">
           <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">
-            PARTNERSHIP
+            PARTENARIAT
           </p>
           <h2 className="text-4xl font-bold text-gray-800">
-            Trusted by <span className="font-light text-gray-700">Our Partners</span>
+            Recommandé par <span className="font-light text-gray-700">nos partenaires</span>
           </h2>
           <div className="mt-4 w-12 h-1 rounded bg-orange-500 mx-auto" />
           <p className="mt-6 text-gray-600 text-sm font-light max-w-2xl mx-auto">
-            We have partnered with organizations to ensure that we provide holistic services to our clients.<br />
-            These organizations include :
+            Nous avons établi des partenariats avec plusieurs organisations afin d’offrir un service complet à nos clients.<br />
+            Ces organisations comprennent notamment :
           </p>
         </div>
 

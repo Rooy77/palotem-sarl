@@ -4,16 +4,16 @@ import { motion } from 'framer-motion'
 
 const values = [
   {
-    title: 'Reliability',
-    //description: 'To be the Premier (first) Choice for the Clients in DRCONGO, AFRICA and whole world.',
+    title: 'Fiabilité',
+    //description: 'Être le premier (choix numéro un) pour les clients en RDC, en Afrique et dans le monde entier.',
   },
   {
-    title: 'Quality service',
-    //description: 'To provide the most important exquisite services for clients that make them have marketable experience within Africa and Worldwide.',
+    title: 'Service de qualité',
+    //description: 'Fournir les services les plus importants et exquis aux clients afin qu’ils vivent une expérience valorisante en Afrique et dans le monde.',
   },
   {
-    title: 'Integrity',
-    //description: 'At Society PALOTEM Sarl, we build every relationship and every project around three core principles: Reliability, Quality, and Integrity.',
+    title: 'Intégrité',
+    //description: 'Chez Société PALOTEM Sarl, nous construisons chaque relation et chaque projet autour de trois principes fondamentaux : Fiabilité, Qualité et Intégrité.',
   },
 ]
 
@@ -23,9 +23,9 @@ export default function CorevPage() {
         <div className='space-y-6 mb-6 items-center justify-center text-center'>
             <br />
             <br />
-            <p className="uppercase text-sm tracking-widest text-orange-600 barlow-condensed-regular">core value</p>
+            <p className="uppercase text-sm tracking-widest text-orange-600 barlow-condensed-regular">valeurs fondamentales</p>
             <h1 className="text-4xl font-bold text-gray-700">
-                <span className="block font-light text-gray-700">Our Values</span>
+                <span className="block font-light text-gray-700">Nos Valeurs</span>
                
             </h1>
         </div>
@@ -43,7 +43,7 @@ export default function CorevPage() {
                 {values.title}
                 </h2> 
                 <p className="text-sm md:text-sm text-gray-600 font-light leading-relaxed">
-                
+                  {/* Description ici si besoin */}
                 </p>
             </motion.div>
             ))}

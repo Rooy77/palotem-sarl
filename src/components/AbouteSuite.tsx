@@ -5,15 +5,18 @@ import { motion } from 'framer-motion'
 const services = [
   {
     title: '01. MISSION',
-    description: 'To be the Premier (first) Choice for the Clients in DRCONGO, AFRICA and whole world.',
+    description:
+      'Être le premier choix pour les clients en RDC, en Afrique et dans le monde entier.',
   },
   {
     title: '02. VISION',
-    description: 'To provide the most important exquisite services for clients that make them have marketable experience within Africa and Worldwide.',
+    description:
+      'Offrir les services les plus exquis et les plus importants aux clients, afin de leur procurer une expérience valorisable sur le marché en Afrique et à l’international.',
   },
   {
     title: '03. NOS PILIERS',
-    description: 'At Society PALOTEM Sarl, we build every relationship and every project around three core principles: Reliability, Quality, and Integrity.',
+    description:
+      'Chez Society PALOTEM Sarl, nous bâtissons chaque relation et chaque projet autour de trois principes fondamentaux : la Fiabilité, la Qualité et l’Intégrité.',
   },
 ]
 

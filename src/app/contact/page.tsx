@@ -21,7 +21,7 @@ export default function ContactSection() {
                 <div className="col col-xs-12">
                   <h2>Contact</h2>
                   <ol className="text-sm text-center font-light justify-center flex space-x-2">
-                    <li className="text-orange-500"><a href="#">Home</a> &gt;</li>
+                    <li className="text-orange-500"><a href="#">Accueil</a> &gt;</li>
                     <li>Contact</li>
                   </ol>
                 </div>
@@ -34,16 +34,16 @@ export default function ContactSection() {
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10">
           <div>
-            <h3 className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Contact With Us</h3>
+            <h3 className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Contactez-nous</h3>
             <p className="text-gray-600 text-5xl mb-6 barlow-condensed-medium">
-              <span className="barlow-condensed-light"> You can </span> contact us, <br /> if you have any query.
+              <span className="barlow-condensed-light"> Vous pouvez </span> nous contacter, <br /> si vous avez une question.
             </p>
             <ContactF />
           </div>
 
           <div className="space-y-4 sm:space-y-5">
             <div className="space-y-4 bg-orange-500 p-8 h-auto w-auto">
-              {/* Contact Email */}
+              {/* Email de contact */}
               <div className="flex items-start space-x-3">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary mt-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
                 <div>
@@ -72,7 +72,7 @@ export default function ContactSection() {
                   <h3 className="text-md font-medium text-foreground">Bureau (Sur Rendez-vous)</h3>
                   <p className="text-sm font-light text-muted-foreground hover:text-primary transition-colors break-all">
                     <span className="font-medium">Adresse siège : </span>Goma, 03 Av. de la Frontière, Q. Katindo <br />
-                    <span className="font-medium">Bureau L&apos;shi : </span> 96 Av. du Cadastre, Q. Salama, C. L&apos;shi <br />
+                    <span className="font-medium">Bureau L&apos;shi : </span>96 Av. du Cadastre, Q. Salama, C. L&apos;shi <br />
                     <span className="font-medium">Adresse :</span> Lubumbashi • Goma • Bukavu • Kinshasa / RD. Congo
                   </p>
                 </div>

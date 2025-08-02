@@ -22,7 +22,7 @@ export default function AboutPage() {
       <div className="space-y-6">
         <p className="uppercase text-sm tracking-widest text-orange-600 barlow-condensed-regular">About us</p>
         <h1 className="text-4xl font-bold text-gray-900">
-          <span className="block text-gray-700">Welcome to</span>
+          <span className="block text-gray-700">Bienvenu Chez</span>
           Society Palotem Sarl
         </h1>
 

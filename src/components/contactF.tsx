@@ -10,6 +10,7 @@ export default function Contact() {
     subject: "",
     message: ""
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState<{
     show: boolean;
@@ -31,17 +32,17 @@ export default function Contact() {
       if (response.ok) {
         setNotification({
           show: true,
-          message: "Message sent successfully!",
+          message: "Message envoyé avec succès !",
           type: "success"
         });
         setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
       } else {
-        throw new Error("Failed to send");
+        throw new Error("Échec de l'envoi");
       }
     } catch {
       setNotification({
         show: true,
-        message: "Error sending message. Please try again.",
+        message: "Erreur lors de l’envoi du message. Veuillez réessayer.",
         type: "error"
       });
     } finally {
@@ -49,7 +50,6 @@ export default function Contact() {
     }
   };
 
-  // Fermeture automatique après 5s
   useEffect(() => {
     if (notification.show) {
       const timer = setTimeout(() => {
@@ -71,7 +71,7 @@ export default function Contact() {
           <input
             type="text"
             name="name"
-            placeholder="Name"
+            placeholder="Nom"
             value={formData.name}
             onChange={handleChange}
             required
@@ -80,7 +80,7 @@ export default function Contact() {
           <input
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="Adresse e-mail"
             value={formData.email}
             onChange={handleChange}
             required
@@ -91,7 +91,7 @@ export default function Contact() {
           <input
             type="tel"
             name="phone"
-            placeholder="Phone"
+            placeholder="Téléphone"
             value={formData.phone}
             onChange={handleChange}
             className="border w-full border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -99,7 +99,7 @@ export default function Contact() {
           <input
             type="text"
             name="subject"
-            placeholder="Contact Subject"
+            placeholder="Objet du message"
             value={formData.subject}
             onChange={handleChange}
             required
@@ -109,7 +109,7 @@ export default function Contact() {
         <textarea
           name="message"
           rows={5}
-          placeholder="Case Description"
+          placeholder="Votre message"
           value={formData.message}
           onChange={handleChange}
           required
@@ -122,7 +122,7 @@ export default function Contact() {
             isSubmitting ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
           }`}
         >
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+          {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'}
         </button>
       </form>
 

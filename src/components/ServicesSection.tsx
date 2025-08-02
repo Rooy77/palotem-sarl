@@ -22,7 +22,7 @@ const services = [
   {
     title: "Logistique & Transport",
     description:
-      "ONous proposons des services de transport de marchandises, fret national et international, gestion de stock, entreposage et distribution. Nous travaillons avec les meilleurs réseaux logistiques pour garantir la fiabilité.",
+      "Nous proposons des services de transport de marchandises, fret national et international, gestion de stock, entreposage et distribution. Nous travaillons avec les meilleurs réseaux logistiques pour garantir la fiabilité.",
     icon: <Coins className="text-orange-500 w-6 h-6" />,
     image: "/img/port.jpg",
   },
@@ -35,11 +35,11 @@ export default function Services() {
         <div className="text-center mb-12">
           <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Services</p>
           <h2 className="text-4xl font-bold text-gray-800">
-            We are competent <br /> <span className="font-light text-gray-700">in our Values</span>
+            Nous sommes compétents <br /> <span className="font-light text-gray-700">dans nos valeurs</span>
           </h2>
           <div className="mt-4 w-12 h-1 rounded bg-orange-500 mx-auto" />
           <p className="mt-6 text-gray-600 text-sm font-light max-w-2xl mx-auto">
-            As a unique entrepreneurial company rooted in the community, Royal Import Export Sarl creates value for stakeholders through an investment strategy that strictly adheres to our Vision, Mission and Values. We strive for excellence to realise the hopes and aspirations of our company and communities.
+            En tant qu’entreprise entrepreneuriale unique et enracinée dans la communauté, Royal Import Export Sarl crée de la valeur pour ses parties prenantes grâce à une stratégie d’investissement qui respecte strictement notre Vision, Mission et Valeurs. Nous visons l’excellence pour réaliser les espoirs et aspirations de notre société et de nos communautés.
           </p>
         </div>
 

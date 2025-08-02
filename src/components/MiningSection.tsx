@@ -4,22 +4,22 @@ import Image from "next/image";
 
 const reasons = [
   {
-    title: "Experienced & Trained Staff",
+    title: "Personnel expérimenté et formé",
     image: "https://images.pexels.com/photos/8547341/pexels-photo-8547341.jpeg",
     description:
-      "Our experience staff is trained to provide quality Client relation service tailored to the need of the client.",
+      "Notre personnel expérimenté est formé pour fournir un service de relation client de qualité, adapté aux besoins du client.",
   },
   {
-    title: "Client-Centered Approach",
+    title: "Approche centrée sur le client",
     image: "https://images.pexels.com/photos/8867252/pexels-photo-8867252.jpeg",
     description:
-      "We understand each client is unique, we strive to understand the goals of the required service and deliver a personalized service that will help achieve Client's need or objective.",
+      "Nous comprenons que chaque client est unique, nous nous efforçons de comprendre les objectifs du service demandé et de fournir un service personnalisé qui aidera à atteindre les besoins ou objectifs du client.",
   },
   {
-    title: "Multilingual Communication",
+    title: "Communication multilingue",
     image: "https://images.pexels.com/photos/9487622/pexels-photo-9487622.jpeg",
     description:
-      "Our team composed of multilingual staffs that are fluent in major United Nations Languages hence they can easily connect with Clients they are attending to.",
+      "Notre équipe est composée de personnels multilingues maîtrisant les principales langues des Nations Unies, ce qui leur permet de communiquer facilement avec les clients qu'ils assistent.",
   },
 ];
 
@@ -27,7 +27,7 @@ export default function WhyUsPage() {
   return (
     <section className="bg-gray-100 py-16">
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
-        {/* Left images layout */}
+        {/* Disposition des images à gauche */}
         <div className="flex gap-4 justify-center">
           <div className="relative mt-6 w-40 h-50">
             <Image
@@ -59,10 +59,10 @@ export default function WhyUsPage() {
           </div>
         </div>
 
-        {/* Right text layout */}
+        {/* Disposition du texte à droite */}
         <div>
           <div className="mb-6">
-            <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Why Choose</p>
+            <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Pourquoi nous choisir</p>
             <h2 className="text-4xl font-bold text-gray-800">
               Société Palotem <span className="font-light text-gray-700">Sarl</span>
             </h2>
