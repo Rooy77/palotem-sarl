@@ -100,14 +100,14 @@ export default function ArticlePage() {
                 navigator.clipboard.writeText(window.location.href);
                 alert("Lien copié !");
               }}
-              className="flex items-center px-2 py-2 cursor-pointer transition-all border-gray-300 border-2 hover:text-orange-500"
+              className="hover:text-gray-100 text-gray-400 hover:bg-orange-500 hover:border-orange-500 px-2 py-2 cursor-pointer transition border-gray-300 border-2"
               title="Partager l'article"
             >
                <svg 
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none" viewBox="0 0 24 24"
                     strokeWidth={1.5} 
-                    stroke="currentColor" className="size-6">
+                    stroke="currentColor" className="size-4.5">
                     <path 
                         strokeLinecap="round" 
                         strokeLinejoin="round" 
@@ -120,7 +120,7 @@ export default function ArticlePage() {
             {/* Bouton imprimer */}
             <button
               onClick={() => window.print()}
-              className="hover:text-gray-100 text-gray-400 hover:bg-orange-500 px-2 py-2 cursor-pointer transition border-gray-300 border-2"
+              className="hover:text-gray-100 text-gray-400 hover:bg-orange-500 hover:border-orange-500 px-2 py-2 cursor-pointer transition border-gray-300 border-2"
               title="Imprimer l'article"
             >
                 <svg 
@@ -129,7 +129,7 @@ export default function ArticlePage() {
                     viewBox="0 0 24 24" 
                     strokeWidth={1.5} 
                     stroke="currentColor" 
-                    className="size-6">
+                    className="size-4.5">
                     <path 
                         strokeLinecap="round" 
                         strokeLinejoin="round" 
