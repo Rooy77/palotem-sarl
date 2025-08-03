@@ -20,7 +20,7 @@ export default function AboutPage() {
 
       {/* Text Content */}
       <div className="space-y-6">
-        <p className="uppercase text-sm tracking-widest text-orange-600 barlow-condensed-regular">About us</p>
+        <h3 className="uppercase text-sm tracking-widest text-orange-600 font-regular">About us</h3>
         <h1 className="text-4xl font-bold text-gray-900">
           <span className="block text-gray-700">Bienvenu Chez</span>
           Society Palotem Sarl

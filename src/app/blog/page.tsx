@@ -83,9 +83,9 @@ export default function BlogPage() {
         </div>
         <div className="max-w-6xl mx-auto px-4 py-10">
             <div className="text-center mb-12">
-            <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Blog</p>
-            <h2 className="text-4xl font-bold text-gray-800">
-              Nos dernières actualités
+            <h3 className="text-orange-500 font-regular uppercase tracking-widest text-sm">Blog</h3>
+            <h2 className="text-4xl font-semibold text-gray-800">
+              <span className="font-light">Nos dernières</span>  actualités
             </h2>
             <div className="mt-4 w-12 h-1 rounded bg-orange-500 mx-auto" />
           </div>

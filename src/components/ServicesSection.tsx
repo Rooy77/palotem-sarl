@@ -33,7 +33,7 @@ export default function Services() {
     <section className="bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Services</p>
+          <h3 className="text-orange-500 font-regular uppercase tracking-widest text-sm">Services</h3>
           <h2 className="text-4xl font-bold text-gray-800">
             Nous sommes compétents <br /> <span className="font-light text-gray-700">dans nos valeurs</span>
           </h2>

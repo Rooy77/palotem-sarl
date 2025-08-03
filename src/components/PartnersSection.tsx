@@ -16,11 +16,11 @@ export default function PartnersSection() {
     <section className="bg-white py-16">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <div className="text-center mb-12">
-          <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">
+          <h3 className="text-orange-500 font-light uppercase tracking-widest text-sm">
             PARTENARIAT
-          </p>
+          </h3>
           <h2 className="text-4xl font-bold text-gray-800">
-            Recommandé par <span className="font-light text-gray-700">nos partenaires</span>
+            Recommandé <span className="font-light text-gray-700"> <br /> par nos partenaires</span>
           </h2>
           <div className="mt-4 w-12 h-1 rounded bg-orange-500 mx-auto" />
           <p className="mt-6 text-gray-600 text-sm font-light max-w-2xl mx-auto">

@@ -34,10 +34,10 @@ export default function ContactSection() {
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10">
           <div>
-            <h3 className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Contactez-nous</h3>
-            <p className="text-gray-600 text-5xl mb-6 barlow-condensed-medium">
-              <span className="barlow-condensed-light"> Vous pouvez </span> nous contacter, <br /> si vous avez une question.
-            </p>
+            <h3 className="text-orange-500 font-regular uppercase tracking-widest text-sm">Contactez-nous</h3>
+            <h2 className="text-gray-600 text-5xl mb-6 font-medium">
+              <span className="font-light">Vous pouvez</span> <br /> nous contacter, <br /> si vous avez une question.
+            </h2>
             <ContactF />
           </div>
 

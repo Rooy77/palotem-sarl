@@ -62,7 +62,7 @@ export default function WhyUsPage() {
         {/* Disposition du texte à droite */}
         <div>
           <div className="mb-6">
-            <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">Pourquoi nous choisir</p>
+            <h3 className="text-orange-500 font-regular uppercase tracking-widest text-sm">Pourquoi choisir</h3>
             <h2 className="text-4xl font-bold text-gray-800">
               Société Palotem <span className="font-light text-gray-700">Sarl</span>
             </h2>
