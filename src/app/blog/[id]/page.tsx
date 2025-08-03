@@ -22,6 +22,7 @@ export default function ArticlePage() {
   const { id } = useParams();
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showShareBox, setShowShareBox] = useState(false);
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -41,8 +42,10 @@ export default function ArticlePage() {
   if (loading) return <p className="text-center py-20">Chargement...</p>;
   if (!article) return <p className="text-center py-20">Article introuvable.</p>;
 
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+
   return (
-    <section>
+    <section className="font-barlow">
       {/* Bannière */}
       <div className="relative w-full h-[40vh]">
         <div className="absolute top-0 left-0 w-full h-full z-10">
@@ -56,7 +59,6 @@ export default function ArticlePage() {
           <div className="absolute bg-gray-800/40 inset-0 flex items-center text-white">
             <div className="max-w-6xl mx-auto px-4">
               <div className="max-w-3xl">
-                <h2 className="text-3xl md:text-5xl font-semibold">{article.title}</h2>
                 <ol className="text-sm font-light flex space-x-2 mt-2 text-center items-center justify-center">
                   <li className="text-orange-500">
                     <Link href="/">Accueil</Link> &gt;
@@ -64,7 +66,7 @@ export default function ArticlePage() {
                   <li>
                     <Link href="/blog">Blog</Link> &gt;
                   </li>
-                  <li className="text-white">{article.title}</li>
+                  <li className="text-white underline">{article.title}</li>
                 </ol>
               </div>
             </div>
@@ -72,9 +74,9 @@ export default function ArticlePage() {
         </div>
       </div>
 
-      {/* Contenu */}
-      <div className="max-w-4xl mx-auto px-4 py-10">
-        <div className="mb-6">
+      {/* Image principale */}
+      <div className="relative z-20 -mt-24 sm:-mt-28 md:-mt-32 max-w-4xl mx-auto px-4">
+        <div className="overflow-hidden">
           <Image
             src={article.image}
             alt={article.title}
@@ -83,68 +85,92 @@ export default function ArticlePage() {
             className="w-full h-auto object-cover"
           />
         </div>
+      </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
-          <span className="px-3 py-1 text-sm text-orange-500 border-orange-500/20 rounded-full border bg-orange-100">
-            {article.category}
-          </span>
-
-          <div className="flex items-center gap-3 text-sm text-gray-500">
-            <p>
-              • Publié <RelativeTime date={article.createdAt.toDate()} />
+      {/* Contenu */}
+      <div className="max-w-4xl mx-auto px-4 py-10">
+        <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="px-3 py-1 text-sm text-orange-500 border-orange-500/20 rounded-full border bg-orange-100">
+              {article.category}
+            </span>
+            <p className="text-[10px] sm:text-sm text-gray-500">
+              • <RelativeTime date={article.createdAt.toDate()} />
             </p>
+          </div>
 
-            {/* Bouton partager */}
+          <div className="relative flex items-center gap-4">
+            {/* Bouton de partage */}
             <button
-              onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-                alert("Lien copié !");
-              }}
+              onClick={() => setShowShareBox(!showShareBox)}
               className="hover:text-gray-100 text-gray-400 hover:bg-orange-500 hover:border-orange-500 px-2 py-2 cursor-pointer transition border-gray-300 border-2"
-              title="Partager l'article"
+              title="Partager"
             >
-               <svg 
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 24 24"
-                    strokeWidth={1.5} 
-                    stroke="currentColor" className="size-4.5">
-                    <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z"
-                    />
-                </svg>
-
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="size-4">
+                <path fillRule="evenodd" d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z" clipRule="evenodd" />
+              </svg>
             </button>
 
-            {/* Bouton imprimer */}
-            <button
-              onClick={() => window.print()}
-              className="hover:text-gray-100 text-gray-400 hover:bg-orange-500 hover:border-orange-500 px-2 py-2 cursor-pointer transition border-gray-300 border-2"
-              title="Imprimer l'article"
-            >
-                <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    strokeWidth={1.5} 
-                    stroke="currentColor" 
-                    className="size-4.5">
-                    <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" 
+            {/* Boîte de partage */}
+            {showShareBox && (
+              <div className="absolute right-0 top-10 bg-white border border-gray-300 px-1 py-1 flex gap-1 z-50">
+                <a
+                    href={`https://wa.me/?text=${encodeURIComponent(shareUrl)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="WhatsApp"
+                    className="hover:scale-110 transition flex items-center justify-center text-center gap-1 bg-[#dcf8c6] py-3 px-6"
+                >
+                    <Image
+                    src="/logos/Whatsapp.svg"
+                    alt="WhatsApp"
+                    width={30}
+                    height={30}
+                    className="w-5 h-5"
                     />
-                </svg>
-                
-            </button>
+                    <span className="text-[10px] text-[#128c7e] font-bold">WhatsApp</span>
+                </a>
+
+                <a
+                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="LinkedIn"
+                    className="hover:scale-110 transition flex items-center justify-center text-center gap-1 bg-[#dde7f0] py-3 px-6"
+                >
+                    <Image
+                    src="/logos/linkedin.svg"
+                    alt="LinkedIn"
+                    width={20}
+                    height={20}
+                    className="w-5 h-5"
+                    />
+                    <span className="text-[10px] text-[#0e76a8] font-bold">Linkdin</span>
+                </a>
+
+                <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Facebook"
+                    className="hover:scale-110 transition flex items-center justify-center text-center gap-1 bg-[#dfe1ee] py-3 px-6"
+                >
+                    <Image
+                    src="/logos/Facebook.svg"
+                    alt="Facebook"
+                    width={20}
+                    height={20}
+                    className="w-5 h-5"
+                    />
+                    <span className="text-[10px] text-[#3b5998] font-bold">Facebook</span>
+                </a>
+                </div>
+            )}
           </div>
         </div>
 
         <h1 className="text-3xl font-bold mb-4 text-gray-800">{article.title}</h1>
-
         <p className="text-gray-700 mb-6">{article.description}</p>
-
         <div className="prose prose-orange max-w-none">
           <div dangerouslySetInnerHTML={{ __html: article.content }} />
         </div>
