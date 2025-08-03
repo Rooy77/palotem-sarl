@@ -6,8 +6,14 @@ import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
- // Assure-toi que le chemin est correct
+import { Barlow_Condensed } from "next/font/google";
 
+const barlow = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+// Définition des liens de navigation
 const navItems = [
   { label: "ACCUEIL", href: "/" },
   { label: "A PROPOS", href: "/about" },
@@ -49,9 +55,9 @@ export default function Header() {
               className="rounded-full object-cover"
             />
             <span
-              className={`text-2xl font-semibold leading-6 barlow-condensed-regular transition-colors duration-300 ${
+              className={`text-2xl font-semibold leading-6 transition-colors duration-300 ${
                 scrolled ? "text-gray-800" : "text-white"
-              }`}
+              } ${barlow.className}`}
             >
               Société <br /> Palotem Sarl
             </span>
@@ -63,20 +69,19 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-lg font-medium barlow-condensed-regular hover:text-orange-600 transition-colors duration-200 ${
+                className={`text-lg font-medium hover:text-orange-600 transition-colors duration-200 ${
                   pathname === item.href
                     ? "text-orange-600"
                     : scrolled
                     ? "text-gray-700"
                     : "text-white"
-                }`}
+                } ${barlow.className}`}
               >
                 {item.label}
               </Link>
             ))}
 
             {/* Language Switcher Desktop */}
-
             <Link
               href="/quote"
               className={`ml-4 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200 ${
@@ -90,7 +95,7 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Menu bouton (mobile) */}
+          {/* Bouton Menu Mobile */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
@@ -106,7 +111,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Menu Mobile Animé */}
+      {/* Menu Mobile */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -121,9 +126,9 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className={`block text-base font-medium barlow-condensed-regular transition-colors duration-200 ${
+                className={`block text-base font-medium transition-colors duration-200 ${
                   pathname === item.href ? "text-orange-600" : "text-gray-700"
-                }`}
+                } ${barlow.className}`}
               >
                 {item.label}
               </Link>
