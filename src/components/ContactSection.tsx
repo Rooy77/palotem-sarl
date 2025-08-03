@@ -10,7 +10,7 @@ export default function Contact() {
         {/* Image avec contenu superposé */}
         <div className="relative h-[500px] w-full">
           <Image
-            src="https://images.unsplash.com/photo-1532074205216-d0e1f4b87368?q=80&w=1160"
+            src="https://images.pexels.com/photos/5647584/pexels-photo-5647584.jpeg"
             alt="Contact"
             fill
             className="object-cover"
