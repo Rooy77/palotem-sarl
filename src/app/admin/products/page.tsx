@@ -88,6 +88,11 @@ export default function ProductsPage() {
   const [showModal, setShowModal] = useState(false);
   const [toasts, setToasts] = useState<Toast[]>([]);
 
+  // 🔍 Recherche et tri
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortField, setSortField] = useState<"name" | "price" | "category">("name");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+
   const {
     register,
     handleSubmit,
@@ -110,7 +115,7 @@ export default function ProductsPage() {
     return () => clearTimeout(timer);
   }, [toasts]);
 
-  // Fetch total products count
+  // Compter produits
   useEffect(() => {
     const fetchTotalCount = async () => {
       const col = collection(db, "products");
@@ -120,7 +125,7 @@ export default function ProductsPage() {
     fetchTotalCount();
   }, []);
 
-  // Fetch products with pagination
+  // Charger produits avec pagination + tri
   useEffect(() => {
     setLoading(true);
 
@@ -128,9 +133,9 @@ export default function ProductsPage() {
       const col = collection(db, "products");
       let q;
       if (page === 1 || !lastVisible) {
-        q = query(col, orderBy("name"), limit(PRODUCTS_PER_PAGE));
+        q = query(col, orderBy(sortField, sortOrder), limit(PRODUCTS_PER_PAGE));
       } else {
-        q = query(col, orderBy("name"), startAfter(lastVisible), limit(PRODUCTS_PER_PAGE));
+        q = query(col, orderBy(sortField, sortOrder), startAfter(lastVisible), limit(PRODUCTS_PER_PAGE));
       }
 
       const snapshot = await getDocs(q);
@@ -149,7 +154,7 @@ export default function ProductsPage() {
     };
 
     fetchProducts();
-  }, [page, lastVisible]);
+  }, [page, sortField, sortOrder, lastVisible]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Voulez-vous vraiment supprimer ce produit ?")) return;
@@ -202,6 +207,13 @@ export default function ProductsPage() {
     }
   };
 
+  // 🔍 Filtrage client-side
+  const filteredProducts = products.filter((p) =>
+    [p.name, p.category, p.description].some((f) =>
+      f.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
   return (
     <main>
       <Topbar />
@@ -221,30 +233,65 @@ export default function ProductsPage() {
             Total produits : <span className="text-orange-500">{totalProducts}</span>
           </p>
 
+          {/* 🔍 Barre recherche + tri */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-4">
+            <input
+              type="text"
+              placeholder="Rechercher un produit..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="px-4 py-2 rounded-lg border border-gray-300 shadow-sm w-full sm:w-1/3"
+            />
+            <select
+              value={sortField}
+              onChange={(e) => setSortField(e.target.value as "name" | "price" | "category")}
+              className="px-3 py-2 rounded-lg border border-gray-300"
+            >
+              <option value="name">Nom</option>
+              <option value="price">Prix</option>
+              <option value="category">Catégorie</option>
+            </select>
+            <select
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
+              className="px-3 py-2 rounded-lg border border-gray-300"
+            >
+              <option value="asc">Ascendant</option>
+              <option value="desc">Descendant</option>
+            </select>
+          </div>
+
           {/* Table header */}
           <div className="grid grid-cols-[100px_1fr_1fr_1fr_1fr_100px] gap-4 bg-gray-100 p-4 rounded-t-lg font-medium text-sm/6 text-gray-700 border border-gray-300">
-            <div role="columnheader">Image</div>
-            <div role="columnheader">Nom</div>
-            <div role="columnheader">Catégorie</div>
-            <div role="columnheader">Description</div>
-            <div role="columnheader">Prix (USD)</div>
-            <div role="columnheader">Actions</div>
+            <div>Image</div>
+            <div>Nom</div>
+            <div>Catégorie</div>
+            <div>Description</div>
+            <div>Prix (USD)</div>
+            <div>Actions</div>
           </div>
 
           {/* Products */}
           {loading ? (
-            <p className="text-center py-10 text-sm/6">Chargement...</p>
-          ) : products.length === 0 ? (
+            // ⏳ Skeleton loader
+            <div>
+              {Array.from({ length: PRODUCTS_PER_PAGE }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-16 bg-gray-200 animate-pulse rounded-b-lg border-x border-b border-gray-300"
+                />
+              ))}
+            </div>
+          ) : filteredProducts.length === 0 ? (
             <p className="text-center py-10 text-gray-500 text-sm/6">Aucun produit trouvé.</p>
           ) : (
             <div>
-              {products.map((product, idx) => (
+              {filteredProducts.map((product, idx) => (
                 <div
                   key={product.id}
                   className={`grid grid-cols-[100px_1fr_1fr_1fr_1fr_100px] gap-4 border-x border-b border-gray-300 p-4 items-center ${
                     idx % 2 === 0 ? "bg-white" : "bg-gray-50"
                   }`}
-                  role="row"
                 >
                   <div className="relative w-20 h-16 rounded overflow-hidden border border-gray-200">
                     <Image
@@ -303,7 +350,7 @@ export default function ProductsPage() {
             </div>
           )}
 
-          {/* Edit Modal */}
+          {/* Modal édition */}
           <AnimatePresence>
             {showModal && selectedProduct && (
               <motion.div
@@ -326,21 +373,21 @@ export default function ProductsPage() {
                   <label className="block font-semibold mb-1">Nom</label>
                   <input
                     {...register("name", { required: "Nom requis" })}
-                    className="w-full border border-gray-900/25 rounded-lg text-gray-400 focus:outline px-3 py-2"
+                    className="w-full border border-gray-900/25 rounded-lg text-gray-400 px-3 py-2"
                   />
                   {errors.name && <p className="text-red-500 mb-2">{errors.name.message}</p>}
 
                   <label className="block font-semibold mb-1">Catégorie</label>
                   <input
                     {...register("category", { required: "Catégorie requise" })}
-                    className="w-full border border-gray-900/25 rounded-lg text-gray-400 focus:outline px-3 py-2"
+                    className="w-full border border-gray-900/25 rounded-lg text-gray-400 px-3 py-2"
                   />
                   {errors.category && <p className="text-red-500 mb-2">{errors.category.message}</p>}
 
                   <label className="block font-semibold mb-1">Description</label>
                   <textarea
                     {...register("description", { required: "Description requise" })}
-                    className="w-full border border-gray-900/25 rounded-lg text-gray-400 focus:outline px-3 py-2"
+                    className="w-full border border-gray-900/25 rounded-lg text-gray-400 px-3 py-2"
                     rows={3}
                   />
                   {errors.description && <p className="text-red-500 mb-2">{errors.description.message}</p>}
@@ -354,14 +401,14 @@ export default function ProductsPage() {
                       valueAsNumber: true,
                       min: { value: 0, message: "Prix doit être positif" },
                     })}
-                    className="w-full border border-gray-900/25 rounded-lg text-gray-400 focus:outline px-3 py-2"
+                    className="w-full border border-gray-900/25 rounded-lg text-gray-400 px-3 py-2"
                   />
                   {errors.price && <p className="text-red-500 mb-2">{errors.price.message}</p>}
 
                   <label className="block font-semibold mb-1">URL image</label>
                   <input
                     {...register("image", { required: "URL image requise" })}
-                    className="w-full border border-gray-900/25 rounded-lg text-gray-400 focus:outline px-3 py-2"
+                    className="w-full border border-gray-900/25 rounded-lg text-gray-400 px-3 py-2"
                   />
                   {errors.image && <p className="text-red-500 mb-2">{errors.image.message}</p>}
 
@@ -376,7 +423,7 @@ export default function ProductsPage() {
                     </button>
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
+                      className="px-4 py-2 bg-orange-500 rounded-lg text-white hover:bg-orange-600"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? "Sauvegarde..." : "Sauvegarder"}
