@@ -3,6 +3,7 @@
 import { CldUploadWidget } from "next-cloudinary";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { CloudUpload } from "lucide-react";
 
 type Props = {
   onUpload: (url: string) => void;
@@ -19,16 +20,15 @@ export default function UploadImage({ onUpload, resetTrigger }: Props) {
   }, [resetTrigger]);
 
   return (
-    <div className="my-4">
+    <div className="mt-4">
       <CldUploadWidget
         uploadPreset="palotem_unsigned"
         options={{
           sources: ["local"],
           maxFiles: 1,
           resourceType: "image",
-          // Configuration recommandée pour Vercel
           cropping: true,
-          croppingAspectRatio: 16/9,
+          croppingAspectRatio: 16 / 9,
           showAdvancedOptions: true,
           multiple: false,
         }}
@@ -46,17 +46,23 @@ export default function UploadImage({ onUpload, resetTrigger }: Props) {
           }
         }}
       >
-        {({ open }) => (
+        {({ open }) =>
           !image && (
-            <button
-              type="button"
+            <span
               onClick={() => open()}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  open();
+                }
+              }}
             >
+              <CloudUpload className="inline mr-2 mb-1" />
               Upload Image
-            </button>
+            </span>
           )
-        )}
+        }
       </CldUploadWidget>
 
       {image && (
@@ -76,7 +82,7 @@ export default function UploadImage({ onUpload, resetTrigger }: Props) {
               setImage(null);
               onUpload("");
             }}
-            className="mt-2 px-3 py-1 bg-red-500 text-white rounded text-sm hover:bg-red-600 transition-colors"
+            className="px-3 py-1 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600 transition-colors"
           >
             Remove Image
           </button>

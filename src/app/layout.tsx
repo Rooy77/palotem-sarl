@@ -1,8 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Header from '@/components/header'
-import { Footer } from "@/components/footer"
+import AppWrapper from '@/components/AppWrapper'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -33,21 +33,21 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children, params }: {
+  children: React.ReactNode
+  params: { locale: string }
+}) {
+  
+ 
   return (
-    <html lang="fr">
+    <html lang={params.locale}>
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#ffffff" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://palotem-sarl.vercel.app/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75" />
-        <meta name="twitter:card" content="summary_large_image" />
       </head>
       <body className={inter.className}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <AppWrapper>{children}</AppWrapper>
       </body>
     </html>
   )

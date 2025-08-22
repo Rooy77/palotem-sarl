@@ -2,23 +2,25 @@
 
 import { useState } from "react"
 import { auth } from "@/lib/firebase"
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth"
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth"
+import { useRouter } from "next/navigation"
 
 export default function AdminAuth() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [user, setUser] = useState<null | { email: string }>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [isRegister, setIsRegister] = useState(false)
+
+  const router = useRouter()
 
   // Connexion
   const handleLogin = async () => {
     setLoading(true)
     setError(null)
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password)
-      setUser({ email: userCredential.user.email || "" })
+      await signInWithEmailAndPassword(auth, email, password)
+      router.push("/admin") // redirige vers le dashboard
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message)
@@ -34,8 +36,8 @@ export default function AdminAuth() {
     setLoading(true)
     setError(null)
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-      setUser({ email: userCredential.user.email || "" })
+      await createUserWithEmailAndPassword(auth, email, password)
+      router.push("/admin") // redirige vers le dashboard après inscription
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message)
@@ -46,51 +48,40 @@ export default function AdminAuth() {
     setLoading(false)
   }
 
-  const logout = async () => {
-    await signOut(auth)
-    setUser(null)
-  }
+  return (
+    <div className="max-w-sm mx-auto p-6 bg-white shadow-lg rounded-xl">
+      <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+        {isRegister ? "Créer un compte admin" : "Connexion Admin"}
+      </h2>
+      
+      <div className="space-y-4">
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-  if (user) {
-    return (
-      <div>
-        <p>Connecté en tant que : {user.email}</p>
-        <button onClick={logout} className="px-4 py-2 bg-red-600 text-white rounded mt-2">
-          Déconnexion
+        {error && <p className="text-red-600 text-sm">{error}</p>}
+
+        <button
+          onClick={isRegister ? handleRegister : handleLogin}
+          disabled={loading}
+          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+        >
+          {loading ? "Chargement..." : isRegister ? "S'inscrire" : "Se connecter"}
         </button>
       </div>
-    )
-  }
 
-  return (
-    <div className="max-w-sm mx-auto p-4 border rounded">
-      <h2 className="text-xl mb-4">{isRegister ? "Inscription" : "Connexion Admin"}</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        className="w-full p-2 mb-2 border rounded"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        className="w-full p-2 mb-2 border rounded"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-
-      {error && <p className="text-red-600 mb-2">{error}</p>}
-
-      <button
-        onClick={isRegister ? handleRegister : handleLogin}
-        disabled={loading}
-        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-      >
-        {loading ? "Chargement..." : isRegister ? "S'inscrire" : "Se connecter"}
-      </button>
-
-      <p className="mt-4 text-center text-sm text-gray-600">
+      <p className="mt-6 text-center text-sm text-gray-600">
         {isRegister ? (
           <>
             Déjà un compte ?{" "}

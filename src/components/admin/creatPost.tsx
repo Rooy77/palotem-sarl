@@ -78,10 +78,10 @@ export default function CreateArticle() {
         className="space-y-4 p-4 max-w-2xl mx-auto"
       >
         <div>
-          <label className="block font-semibold mb-1">Titre</label>
+          <label className="block text-sm/6 font-medium text-gray-900">Titre</label>
           <input
             {...register("title", { required: true })}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-gray-900/25  text-gray-400 focus:outline rounded-lg px-3 py-2"
           />
           {errors.title && (
             <span className="text-red-500">Ce champ est requis</span>
@@ -89,10 +89,10 @@ export default function CreateArticle() {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Catégorie</label>
+          <label className="block text-sm/6 font-medium text-gray-900">Catégorie</label>
           <input
             {...register("category", { required: true })}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-gray-900/25  text-gray-400 focus:outline rounded-lg px-3 py-2"
           />
           {errors.category && (
             <span className="text-red-500">Ce champ est requis</span>
@@ -100,10 +100,10 @@ export default function CreateArticle() {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Description</label>
+          <label className="block text-sm/6 font-medium text-gray-900">Description</label>
           <textarea
             {...register("description", { required: true })}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-gray-900/25  text-gray-400 focus:outline rounded-lg px-3 py-2"
           />
           {errors.description && (
             <span className="text-red-500">Ce champ est requis</span>
@@ -111,10 +111,10 @@ export default function CreateArticle() {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Contenu</label>
+          <label className="block text-sm/6 font-medium text-gray-900">Contenu</label>
           <textarea
             {...register("content", { required: true })}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-gray-900/25  text-gray-400 focus:outline rounded-lg px-3 py-2"
           />
           {errors.content && (
             <span className="text-red-500">Ce champ est requis</span>
@@ -122,7 +122,7 @@ export default function CreateArticle() {
         </div>
 
         <div>
-          <label className="block font-semibold mb-1">Image</label>
+          <label className="block text-sm/6 font-medium text-gray-900">Image</label>
           <UploadImage
             onUpload={(url: string) => {
               setValue("image", url, { shouldValidate: true });

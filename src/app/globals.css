@@ -124,7 +124,7 @@
 /* Base styles */
 body {  
   color: var(--color-foreground);
-  font-family: "Barlow Condensed", sans-serif;
+  
 }
 
 /* Titres */
@@ -152,3 +152,36 @@ h1, h2, h3, h4, h5, h6 {
 .barlow-condensed-bold-italic { font-weight: 700; font-style: italic; }
 .barlow-condensed-extrabold-italic { font-weight: 800; font-style: italic; }
 .barlow-condensed-black-italic { font-weight: 900; font-style: italic; }
+
+
+/* Pour l'animation des toasts */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeInOut {
+  animation: fadeInOut 3s ease forwards;
+}
+
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.2s ease-out forwards;
+}

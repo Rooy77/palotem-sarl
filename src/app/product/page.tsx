@@ -1,100 +1,68 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Product = {
+  id: string;
   name: string;
-  image: string;
-  description: string;
   category: string;
+  description: string;
+  price: number;
+  image: string;
 };
 
-const products: Product[] = [
-  {
-    name: "Cathodes de cuivre",
-    image: "/img/products/Cuivre.jpg",
-    description: "Cuivre raffiné pour diverses industries.",
-    category: "Produits miniers"
-  },
-  {
-    name: "Or",
-    image: "/img/products/or.jpg",
-    description: "Or pur pour l’exportation et l’investissement.",
-    category: "Produits miniers"
-  },
-  {
-    name: "Diamant",
-    image: "/img/products/diamant.jpg",
-    description: "Diamants bruts de qualité exceptionnelle.",
-    category: "Produits miniers"
-  },
-  {
-    name: "Acajou (Mahogany)",
-    image: "/img/products/Mahogany.jpg",
-    description: "Bois précieux pour meubles et décoration.",
-    category: "Arbres rares"
-  },
-  {
-    name: "Iroko",
-    image: "/img/products/Iroko.jpg",
-    description: "Alternative durable au teck.",
-    category: "Arbres rares"
-  },
-  {
-    name: "Sapelli",
-    image: "/img/products/Sapelli.jpg",
-    description: "Bois africain très prisé pour l’ameublement.",
-    category: "Arbres rares"
-  },
-  {
-    name: "Café",
-    image: "/img/products/Café.jpeg",
-    description: "Café Arabica de haute altitude.",
-    category: "Produits agricoles"
-  },
-  {
-    name: "Cacao",
-    image: "/img/products/Cacao.jpg",
-    description: "Cacao brut pour l’industrie chocolatière.",
-    category: "Produits agricoles"
-  },
-  {
-    name: "Huile végétale",
-    image: "/img/products/Huile.jpg",
-    description: "Huile végétale naturelle et bio.",
-    category: "Produits agricoles"
-  },
-  {
-    name: "Ciment",
-    image: "/img/products/Ciment.jpg",
-    description: "Ciment de qualité supérieure.",
-    category: "Matériaux de construction"
-  },
-  {
-    name: "Fer à béton",
-    image: "/img/products/fer.jpg",
-    description: "Fer à béton pour infrastructures durables.",
-    category: "Matériaux de construction"
-  },
-  {
-    name: "Matériaux & outils",
-    image: "/img/products/all.jpeg",
-    description: "Matériaux de construction et outils variés.",
-    category: "Matériaux de construction"
-  },
-];
-
-export default function ProductPage() {
+export default function ProductsPage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      const querySnapshot = await getDocs(collection(db, "products"));
+      const fetchedProducts: Product[] = [];
+      querySnapshot.forEach((doc) => {
+        fetchedProducts.push({ id: doc.id, ...(doc.data() as Omit<Product, "id">) });
+      });
+      setProducts(fetchedProducts);
+      setLoading(false);
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="w-full h-[30rem] flex items-center justify-center bg-gray-900 ">
+        <div
+          className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          role="status">
+          <span
+            className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+          >Chargement...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <div className="w-full h-[30rem] flex items-center justify-center bg-gray-900">
+        <p className="text-center py-20 text-gray-200 bg-gray-800">Aucun produit trouvé.</p>
+      </div>
+    );
+  }
 
   return (
     <section>
       <div className="relative w-full h-[40vh]">
         <div className="absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-100 z-10">
           <Image
-            src="/img/page-title.jpg"
+            src="/img/prod-b.jpg"
             fill
             className="object-cover"
             sizes="100vw"
@@ -117,12 +85,11 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
-
-      <div className="max-w-6xl mx-auto px-8 py-16">
+      <section className="max-w-6xl mx-auto px-8 py-16">
         <div className="text-center mb-12">
-          <p className="text-orange-500 barlow-condensed-regular uppercase tracking-widest text-sm">
+          <h3 className="text-orange-500 font-regular uppercase tracking-widest text-sm">
             produits
-          </p>
+          </h3>
           <h2 className="text-4xl font-bold text-gray-800">
             Society PALOREM Sarl<br />
             <span className="font-light text-gray-700">nos produits</span>
@@ -134,37 +101,52 @@ export default function ProductPage() {
             prenantes à travers une stratégie d’investissement durable.
           </p>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-          {products.map((product) => (
-            <div
-              key={product.name}
-              className="bg-white shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer"
-              onClick={() => setSelectedProduct(product)}
-            >
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={400}
-                height={250}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-[20px] font-medium text-gray-700">{product.name}</h3>
-                <div className="border-b-[2px] mt-2 border-orange-500 max-w-max text-left">
-                  <p className="text-[11.5px] font-medium text-orange-500">{product.category}</p>
-                </div>
-                <p className="mt-4 text-gray-600 text-[13px] font-light max-w-2xl mx-auto">{product.description}</p>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key="products-grid"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.5 }}
+            className=""
+          >
+            {loading ? (
+              <p className="text-center py-20 text-gray-600">Chargement des produits...</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+                {products.map((product) => (
+                  <div
+                    key={product.id}
+                    className="bg-white shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer"
+                    onClick={() => setSelectedProduct(product)}
+                  >
+                    <div className="relative w-full h-48">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h2 className="text-[20px] font-medium text-gray-700">{product.name}</h2>
+                      <p className="border-b-[2px] mt-2 border-orange-500 max-w-max text-left text-[11.5px] font-medium text-orange-500">{product.category}</p>
+                      <p className="mt-4 text-gray-600 text-[13px] font-light max-w-2xl mx-auto">{product.description}</p>
+                      
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-          ))}
-        </div>
+            )}
+        </motion.div>
+        </AnimatePresence>
+      
 
-        {/* Modal */}
+        {/* Modal détaillé */}
         <AnimatePresence>
           {selectedProduct && (
             <motion.div
-              className="fixed inset-0 bg-black/80 bg-opacity-50 flex items-center justify-center z-50"
+              className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -179,33 +161,43 @@ export default function ProductPage() {
               >
                 <button
                   onClick={() => setSelectedProduct(null)}
-                  className="absolute top-6 right-6 text-gray-100 hover:text-orange-500 hover:bg-white hover:border-orange-500 hover:border-1 font-normal text-2xl bg-orange-500 h-8 w-8 transition cursor-pointer"
+                  className="absolute top-6 right-6 text-gray-100 hover:text-orange-500 hover:bg-white hover:border-orange-500 hover:border-1 font-normal text-2xl bg-orange-500 h-8 w-8 transition cursor-pointer items-center justify-center flex"
                   aria-label="Fermer"
                 >
                   ×
                 </button>
+
                 <h2 className="text-[24px] font-medium text-gray-700 mb-4">{selectedProduct.name}</h2>
-                <Image
-                  src={selectedProduct.image}
-                  alt={selectedProduct.name}
-                  width={600}
-                  height={400}
-                  className="mb-4 object-cover w-full"
-                />
-                <p className="text-gray-700 mb-2 text-[15px]">
-                  <strong>Catégorie :</strong>{" "}
-                  <span className="border-b-[2px] mt-2 border-orange-500 max-w-max text-left text-orange-500">
-                    {selectedProduct.category}
-                  </span>
-                </p>
-                <p className="mt-4 text-gray-600 text-[14px] font-light max-w-2xl mx-auto">
+                <div className="relative w-full h-64 mb-4">
+                  <Image
+                    src={selectedProduct.image}
+                    alt={selectedProduct.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-[4rem] items-center justify-center">
+                  <p className="text-gray-700 mb-2 text-[15px]">
+                    <span className="border-b-[2px] mt-2 border-orange-500 max-w-max text-left text-orange-500">
+                      {selectedProduct.category}
+                    </span>
+                  </p>
+                  <p className="text-gray-700 mb-2 ml-[8rem] text-[30px]">
+                    <span className="font-bold">
+                      ${selectedProduct.price.toFixed(0)}
+                    </span>
+                  </p>
+                </div>
+                <p className="text-gray-600 text-[14px] font-light max-w-2xl mx-auto">
                   {selectedProduct.description}
                 </p>
+                
+                
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </section>
     </section>
   );
 }

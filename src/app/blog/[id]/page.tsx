@@ -23,6 +23,7 @@ export default function ArticlePage() {
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
   const [showShareBox, setShowShareBox] = useState(false);
+  const [views, setViews] = useState<number>(0); // compteur utilisé
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -34,9 +35,41 @@ export default function ArticlePage() {
       }
 
       setLoading(false);
-    };
+    };  
 
     fetchArticle();
+  }, [id]);
+
+  // Suivi de visite
+  useEffect(() => {
+    const trackVisit = async () => {
+      try {
+        await fetch("/api/track-visit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ articleId: id }),
+        });
+      } catch (err) {
+        console.error("Erreur suivi visite:", err);
+      }
+    };
+
+    if (id) trackVisit();
+  }, [id]);
+
+  // Récupération des vues
+  useEffect(() => {
+    const fetchViews = async () => {
+      const viewRef = doc(db, "views", id as string);
+      const viewSnap = await getDoc(viewRef);
+
+      if (viewSnap.exists()) {
+        const data = viewSnap.data();
+        setViews(data.count || 0);
+      }
+    };
+
+    if (id) fetchViews();
   }, [id]);
 
   if (loading) return <p className="text-center py-20">Chargement...</p>;
@@ -49,23 +82,13 @@ export default function ArticlePage() {
       {/* Bannière */}
       <div className="relative w-full h-[40vh]">
         <div className="absolute top-0 left-0 w-full h-full z-10">
-          <Image
-            src="/img/blog-b.jpg"
-            fill
-            className="object-cover"
-            alt=""
-            sizes="100vw"
-          />
+          <Image src="/img/blog-b.jpg" fill className="object-cover" alt="" sizes="100vw" />
           <div className="absolute bg-gray-800/40 inset-0 flex items-center text-white">
             <div className="max-w-6xl mx-auto px-4">
               <div className="max-w-3xl">
                 <ol className="text-sm font-light flex space-x-2 mt-2 text-center items-center justify-center">
-                  <li className="text-orange-500">
-                    <Link href="/">Accueil</Link> &gt;
-                  </li>
-                  <li>
-                    <Link href="/blog">Blog</Link> &gt;
-                  </li>
+                  <li className="text-orange-500"><Link href="/">Accueil</Link> &gt;</li>
+                  <li><Link href="/blog">Blog</Link> &gt;</li>
                   <li className="text-white underline">{article.title}</li>
                 </ol>
               </div>
@@ -95,12 +118,12 @@ export default function ArticlePage() {
               {article.category}
             </span>
             <p className="text-[10px] sm:text-sm text-gray-500">
-              • <RelativeTime date={article.createdAt.toDate()} />
+              • <RelativeTime date={article.createdAt.toDate()} /> • {views} vues
             </p>
           </div>
 
+          {/* Partage */}
           <div className="relative flex items-center gap-4">
-            {/* Bouton de partage */}
             <button
               onClick={() => setShowShareBox(!showShareBox)}
               className="hover:text-gray-100 text-gray-400 hover:bg-orange-500 hover:border-orange-500 px-2 py-2 cursor-pointer transition border-gray-300 border-2"
@@ -111,60 +134,21 @@ export default function ArticlePage() {
               </svg>
             </button>
 
-            {/* Boîte de partage */}
             {showShareBox && (
               <div className="absolute right-0 top-10 bg-white border border-gray-300 px-1 py-1 flex gap-1 z-50">
-                <a
-                    href={`https://wa.me/?text=${encodeURIComponent(shareUrl)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="WhatsApp"
-                    className="hover:scale-110 transition flex items-center justify-center text-center gap-1 bg-[#dcf8c6] py-3 px-6"
-                >
-                    <Image
-                    src="/logos/Whatsapp.svg"
-                    alt="WhatsApp"
-                    width={30}
-                    height={30}
-                    className="w-5 h-5"
-                    />
-                    <span className="text-[10px] text-[#128c7e] font-bold">WhatsApp</span>
+                <a href={`https://wa.me/?text=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" title="WhatsApp" className="hover:scale-110 transition flex items-center justify-center text-center gap-1 bg-[#dcf8c6] py-3 px-6">
+                  <Image src="/logos/Whatsapp.svg" alt="WhatsApp" width={30} height={30} className="w-5 h-5" />
+                  <span className="text-[10px] text-[#128c7e] font-bold">WhatsApp</span>
                 </a>
-
-                <a
-                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="LinkedIn"
-                    className="hover:scale-110 transition flex items-center justify-center text-center gap-1 bg-[#dde7f0] py-3 px-6"
-                >
-                    <Image
-                    src="/logos/linkedin.svg"
-                    alt="LinkedIn"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                    />
-                    <span className="text-[10px] text-[#0e76a8] font-bold">Linkdin</span>
+                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" title="LinkedIn" className="hover:scale-110 transition flex items-center justify-center text-center gap-1 bg-[#dde7f0] py-3 px-6">
+                  <Image src="/logos/linkedin.svg" alt="LinkedIn" width={20} height={20} className="w-5 h-5" />
+                  <span className="text-[10px] text-[#0e76a8] font-bold">LinkedIn</span>
                 </a>
-
-                <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="Facebook"
-                    className="hover:scale-110 transition flex items-center justify-center text-center gap-1 bg-[#dfe1ee] py-3 px-6"
-                >
-                    <Image
-                    src="/logos/Facebook.svg"
-                    alt="Facebook"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5"
-                    />
-                    <span className="text-[10px] text-[#3b5998] font-bold">Facebook</span>
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" title="Facebook" className="hover:scale-110 transition flex items-center justify-center text-center gap-1 bg-[#dfe1ee] py-3 px-6">
+                  <Image src="/logos/Facebook.svg" alt="Facebook" width={20} height={20} className="w-5 h-5" />
+                  <span className="text-[10px] text-[#3b5998] font-bold">Facebook</span>
                 </a>
-                </div>
+              </div>
             )}
           </div>
         </div>
