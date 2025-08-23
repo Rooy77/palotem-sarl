@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { FaFacebookF, FaXTwitter, FaLinkedinIn } from "react-icons/fa6"; // Ajout LinkedIn
 
+
 const teamMembers = [
   {
     name: "MICHEL SANGARA",
@@ -63,6 +64,33 @@ const teamMembers = [
     name: "AZIZ JUMA",
     role: "Responsable Automobile",
     desc: "Supervise les opérations automobiles et la logistique des transports de l'entreprise.",
+    img: "/img/glod.jpg",
+    facebook: "https://facebook.com/david.kalonji",
+    twitter: "https://x.com/david_devops",
+    linkedin: "#",
+  },
+  {
+    name: "Mr Martin NDARABU",
+    role: "Responsable Logistique",
+    desc: "Supervise les opérations logistiques.",
+    img: "/img/glod.jpg",
+    facebook: "https://facebook.com/david.kalonji",
+    twitter: "https://x.com/david_devops",
+    linkedin: "#",
+  },
+  {
+    name: "Staff des ingénieurs civils",
+    role: "Ingenieur",
+    desc: "S’occupent de la conception et du plan des constructions.",
+    img: "/img/glod.jpg",
+    facebook: "https://facebook.com/david.kalonji",
+    twitter: "https://x.com/david_devops",
+    linkedin: "#",
+  },
+  {
+    name : "Staff des ingénieurs géologues & des mines",
+    role: "Ingenieur-Architecte",
+    desc: "Ils s’occupent de la prospection et l’exploitation des minerais",
     img: "/img/glod.jpg",
     facebook: "https://facebook.com/david.kalonji",
     twitter: "https://x.com/david_devops",

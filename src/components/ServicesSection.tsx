@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Gem, Bolt, Coins } from "lucide-react"; // Import des icônes Lucide
+import { Gem, Coins, BrickWall, CalendarSync, Truck } from "lucide-react"; // Import des icônes Lucide
 import Mining from "@/components/MiningSection"
 
 const services = [
@@ -9,22 +9,36 @@ const services = [
     title: "Import – Export",
     description:
       "Nous assurons l’importation et l’exportation de produits agricoles (café, cacao, huile, tournesol), matériaux de construction, pièces détachées, vivres frais, vêtements (friperie), etc.",
-    icon: <Bolt className="text-orange-500 w-6 h-6" />, 
+    icon: <CalendarSync className="text-orange-500 w-6 h-6" />, 
     image: "https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg",
   },
   {
     title: "Génie civil & Construction",
     description:
       "Notre département réalise des projets de construction, réhabilitation d’infrastructures, voiries, bâtiments publics et privés. Nous fournissons également des expertises immobilières et accompagnons les investissements immobiliers.",
-    icon: <Gem className="text-orange-500 w-6 h-6" />,
+    icon: <BrickWall className="text-orange-500 w-6 h-6" />,
     image: "https://images.pexels.com/photos/19982408/pexels-photo-19982408.jpeg",
   },
   {
     title: "Logistique & Transport",
     description:
       "Nous proposons des services de transport de marchandises, fret national et international, gestion de stock, entreposage et distribution. Nous travaillons avec les meilleurs réseaux logistiques pour garantir la fiabilité.",
-    icon: <Coins className="text-orange-500 w-6 h-6" />,
+    icon: <Truck className="text-orange-500 w-6 h-6" />,
     image: "/img/port.jpg",
+  },
+  {
+    title: "Mines :",
+    description:
+      "Nous procédons à l’exploitation et la transformation des cathodes et les concentrés de cuivre et cobalt, Nous faisons également l’achat et laventedes pierresprécieuses (Or, diamant, Taurmaline...).",
+    icon: <Gem className="text-orange-500 w-6 h-6" />,
+    image: "/img/mine-s.jpeg",
+  },
+  {
+    title: "Sous-traitance :",
+    description:
+      "Nous proposons des services dans les entreprises minières, entreprises privés et étatiques. Fournituredesvivres, service de nettoyage, Fourniture des matériels de construction, Equipements miniers (Soft).",
+    icon: <Coins className="text-orange-500 w-6 h-6" />,
+    image: "/img/sous-trait.jpg",
   },
 ];
 

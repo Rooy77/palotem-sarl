@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 type Product = {
   id: string;
   name: string;
-  category: string;
+  category: string; // ex: "secteur minier" ou "secteur agricole"
   description: string;
   price: number;
   image: string;
@@ -35,15 +35,23 @@ export default function ProductsPage() {
     fetchProducts();
   }, []);
 
+  // 🔥 Regroupement par secteur/catégorie
+  const groupedProducts = products.reduce((groups: Record<string, Product[]>, product) => {
+    if (!groups[product.category]) {
+      groups[product.category] = [];
+    }
+    groups[product.category].push(product);
+    return groups;
+  }, {});
+
   if (loading) {
     return (
       <div className="w-full h-[30rem] flex items-center justify-center bg-gray-900 ">
         <div
-          className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-          role="status">
-          <span
-            className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-          >Chargement...</span>
+          className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em]"
+          role="status"
+        >
+          <span className="sr-only">Chargement...</span>
         </div>
       </div>
     );
@@ -59,91 +67,65 @@ export default function ProductsPage() {
 
   return (
     <section>
+      {/* Hero */}
       <div className="relative w-full h-[40vh]">
-        <div className="absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-100 z-10">
-          <Image
-            src="/img/prod-b.jpg"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            alt=""
-          />
-          <div className="absolute bg-gray-800/30 inset-0 flex items-center justify-left text-white text-center">
-            <div className="max-w-6xl mx-auto px-4 py-16">
-              <div className="max-w-3xl flex md:text-5xl font-semibold text-xl cursor-pointer">
-                <div className="col col-xs-12">
-                  <h2>Nos Produits</h2>
-                  <ol className="text-sm text-center font-light justify-center flex space-x-2">
-                    <li className="text-orange-500">
-                      <a href="#">Accueil</a> {'>'}
-                    </li>
-                    <li>Produits</li>
-                  </ol>
-                </div>
-              </div>
-            </div>
+        <Image
+          src="/img/prod-b.jpg"
+          fill
+          className="object-cover"
+          sizes="100vw"
+          alt=""
+        />
+        <div className="absolute bg-gray-800/30 inset-0 flex items-center justify-center text-white">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold">Nos Produits</h2>
+            <ol className="text-sm mt-2 font-light flex space-x-2 justify-center">
+              <li className="text-orange-500"><a href="#">Accueil</a> {'>'}</li>
+              <li>Produits</li>
+            </ol>
           </div>
         </div>
       </div>
-      <section className="max-w-6xl mx-auto px-8 py-16">
-        <div className="text-center mb-12">
-          <h3 className="text-orange-500 font-regular uppercase tracking-widest text-sm">
-            produits
-          </h3>
-          <h2 className="text-4xl font-bold text-gray-800">
-            Society PALOREM Sarl<br />
-            <span className="font-light text-gray-700">nos produits</span>
-          </h2>
-          <div className="mt-4 w-12 h-1 rounded bg-orange-500 mx-auto" />
-          <p className="mt-6 text-gray-600 text-sm font-light max-w-2xl mx-auto">
-            En tant qu’entreprise entrepreneuriale enracinée dans la communauté,
-            Royal Import Export Sarl crée de la valeur pour les parties
-            prenantes à travers une stratégie d’investissement durable.
-          </p>
-        </div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key="products-grid"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.5 }}
-            className=""
-          >
-            {loading ? (
-              <p className="text-center py-20 text-gray-600">Chargement des produits...</p>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-                {products.map((product) => (
-                  <div
-                    key={product.id}
-                    className="bg-white shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer"
-                    onClick={() => setSelectedProduct(product)}
-                  >
-                    <div className="relative w-full h-48">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="p-4">
-                      <h2 className="text-[20px] font-medium text-gray-700">{product.name}</h2>
-                      <p className="border-b-[2px] mt-2 border-orange-500 max-w-max text-left text-[11.5px] font-medium text-orange-500">{product.category}</p>
-                      <p className="mt-4 text-gray-600 text-[13px] font-light max-w-2xl mx-auto">{product.description}</p>
-                      
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-        </motion.div>
-        </AnimatePresence>
-      
 
-        {/* Modal détaillé */}
-        <AnimatePresence>
+      {/* Liste des produits par secteur */}
+      <section className="max-w-6xl mx-auto px-8 py-16">
+        {Object.keys(groupedProducts).map((category) => (
+          <div key={category} className="mb-16">
+            {/* Titre du secteur */}
+            <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-orange-500 inline-block">
+              {category}
+            </h2>
+
+            {/* Grille des produits */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {groupedProducts[category].map((product) => (
+                <motion.div
+                  key={product.id}
+                  className="bg-white shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer"
+                  whileHover={{ scale: 1.03 }}
+                  onClick={() => setSelectedProduct(product)}
+                >
+                  <div className="relative w-full h-48">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h2 className="text-[20px] font-medium text-gray-700">{product.name}</h2>
+                    <p className="mt-2 text-gray-600 text-[13px] font-light">{product.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Modal détaillé */}
+      <AnimatePresence>
           {selectedProduct && (
             <motion.div
               className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
@@ -197,7 +179,6 @@ export default function ProductsPage() {
             </motion.div>
           )}
         </AnimatePresence>
-      </section>
     </section>
   );
 }

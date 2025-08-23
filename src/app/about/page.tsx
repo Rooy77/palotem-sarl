@@ -4,9 +4,7 @@ import Team from "@/components/team";
 import Corevalue from "@/components/CoreValue";
 import BusinessM from "@/components/BusinessM";
 import Mining from "@/components/MiningSection";
-
 import Image from "next/image";
-
 import Aboutsuite from "@/components/AbouteSuite";
 
 export default function AboutPage() {
@@ -41,8 +39,8 @@ export default function AboutPage() {
             {/* Text Content */}
             <div className="space-y-6">
               <p className="uppercase barlow-condensed-regular text-sm tracking-widest text-orange-600">À propos de nous</p>
-              <h1 className="text-4xl text-gray-900">
-                <span className="block text-gray-700">Bienvenue chez</span>
+              <h1 className="text-4xl font-bold text-gray-700">
+                <span className="block font-light text-gray-900">Bienvenue chez</span>
                 Royal Import Export Sarl
               </h1>
 

@@ -164,7 +164,31 @@ export default function BlogPage() {
                 </button>
                 </div>
             )}
+            
         </div>
+        <div className="flex justify-center items-center bg-gray-100/50 p-4">
+                <div className="w-full max-w-4xl overflow-hidden shadow-xl border border-gray-200 bg-black">
+                    {/* Video */}
+                    <video
+                    className="w-full h-[20rem]"
+                    controls
+                    autoPlay
+                    muted
+                    loop
+                    >
+                    <source src="/img/imgd.mp4" type="video/mp4" />
+                    Votre navigateur ne supporte pas la vidéo.
+                    </video>
+
+                    {/* Caption */}
+                    <div className="p-4 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
+                    <h2 className="text-lg font-semibold">Pofiter de nos qualité</h2>
+                    <p className="text-sm text-gray-300 mt-1">
+                        Découvrez notre entreprise et nos solutions innovantes à travers cette vidéo.
+                    </p>
+                    </div>
+                </div>
+            </div>
     </section>
   );
 }
