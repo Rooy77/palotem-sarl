@@ -81,7 +81,8 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [totalProducts, setTotalProducts] = useState(0);
-  const [lastVisible, setLastVisible] = useState<QueryDocumentSnapshot<DocumentData> | null>(null);
+  const [lastVisible, setLastVisible] =
+    useState<QueryDocumentSnapshot<DocumentData> | null>(null);
   const [page, setPage] = useState(1);
 
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -90,7 +91,9 @@ export default function ProductsPage() {
 
   // 🔍 Recherche et tri
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortField, setSortField] = useState<"name" | "price" | "category">("name");
+  const [sortField, setSortField] = useState<"name" | "price" | "category">(
+    "name"
+  );
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   const {
@@ -132,11 +135,23 @@ export default function ProductsPage() {
     const fetchProducts = async () => {
       const col = collection(db, "products");
       let q;
-      if (page === 1 || !lastVisible) {
-        q = query(col, orderBy(sortField, sortOrder), limit(PRODUCTS_PER_PAGE));
-      } else {
-        q = query(col, orderBy(sortField, sortOrder), startAfter(lastVisible), limit(PRODUCTS_PER_PAGE));
+
+      if (page === 1) {
+        q = query(
+          col,
+          orderBy(sortField, sortOrder),
+          limit(PRODUCTS_PER_PAGE)
+        );
+      } else if (lastVisible) {
+        q = query(
+          col,
+          orderBy(sortField, sortOrder),
+          startAfter(lastVisible),
+          limit(PRODUCTS_PER_PAGE)
+        );
       }
+
+      if (!q) return;
 
       const snapshot = await getDocs(q);
       if (!snapshot.empty) {
@@ -154,7 +169,7 @@ export default function ProductsPage() {
     };
 
     fetchProducts();
-  }, [page, sortField, sortOrder, lastVisible]);
+  }, [page, sortField, sortOrder]); // ✅ plus de `lastVisible` ici
 
   const handleDelete = async (id: string) => {
     if (!confirm("Voulez-vous vraiment supprimer ce produit ?")) return;
@@ -170,7 +185,10 @@ export default function ProductsPage() {
   };
 
   const nextPage = () => {
-    if (products.length === PRODUCTS_PER_PAGE && page * PRODUCTS_PER_PAGE < totalProducts) {
+    if (
+      products.length === PRODUCTS_PER_PAGE &&
+      page * PRODUCTS_PER_PAGE < totalProducts
+    ) {
       setPage((p) => p + 1);
     }
   };
@@ -198,7 +216,11 @@ export default function ProductsPage() {
     try {
       const productRef = doc(db, "products", selectedProduct.id);
       await updateDoc(productRef, { ...data });
-      setProducts((prev) => prev.map((p) => (p.id === selectedProduct.id ? { ...p, ...data } : p)));
+      setProducts((prev) =>
+        prev.map((p) =>
+          p.id === selectedProduct.id ? { ...p, ...data } : p
+        )
+      );
       closeModal();
       addToast("Produit mis à jour avec succès !", "success");
     } catch (error) {
@@ -220,7 +242,9 @@ export default function ProductsPage() {
       <section className="flex mt-12 gap-8">
         <div className="rounded-2xl border border-gray-200 bg-blue-100/10 p-5 md:p-6 mb-8">
           <div className="flex gap-8">
-            <p className="ml-4 text-xl text-gray-700 font-bold">Ajouter un produit</p>
+            <p className="ml-4 text-xl text-gray-700 font-bold">
+              Ajouter un produit
+            </p>
           </div>
           <Addproduct />
         </div>
@@ -230,7 +254,8 @@ export default function ProductsPage() {
 
           <p className="text-xl font-bold mb-6">Liste des produits en stock</p>
           <p className="mb-4 text-gray-600 font-medium">
-            Total produits : <span className="text-orange-500">{totalProducts}</span>
+            Total produits :{" "}
+            <span className="text-orange-500">{totalProducts}</span>
           </p>
 
           {/* 🔍 Barre recherche + tri */}
@@ -244,7 +269,9 @@ export default function ProductsPage() {
             />
             <select
               value={sortField}
-              onChange={(e) => setSortField(e.target.value as "name" | "price" | "category")}
+              onChange={(e) =>
+                setSortField(e.target.value as "name" | "price" | "category")
+              }
               className="px-3 py-2 rounded-lg border border-gray-300"
             >
               <option value="name">Nom</option>
@@ -253,7 +280,9 @@ export default function ProductsPage() {
             </select>
             <select
               value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
+              onChange={(e) =>
+                setSortOrder(e.target.value as "asc" | "desc")
+              }
               className="px-3 py-2 rounded-lg border border-gray-300"
             >
               <option value="asc">Ascendant</option>
@@ -283,7 +312,9 @@ export default function ProductsPage() {
               ))}
             </div>
           ) : filteredProducts.length === 0 ? (
-            <p className="text-center py-10 text-gray-500 text-sm/6">Aucun produit trouvé.</p>
+            <p className="text-center py-10 text-gray-500 text-sm/6">
+              Aucun produit trouvé.
+            </p>
           ) : (
             <div>
               {filteredProducts.map((product, idx) => (
@@ -302,9 +333,15 @@ export default function ProductsPage() {
                       className="object-cover"
                     />
                   </div>
-                  <div className="font-medium text-gray-600 text-sm/6">{product.name}</div>
-                  <div className="text-gray-600 font-semibold text-sm/6">{product.category}</div>
-                  <div className="text-gray-600 truncate text-sm/6">{product.description}</div>
+                  <div className="font-medium text-gray-600 text-sm/6">
+                    {product.name}
+                  </div>
+                  <div className="text-gray-600 font-semibold text-sm/6">
+                    {product.category}
+                  </div>
+                  <div className="text-gray-600 truncate text-sm/6">
+                    {product.description}
+                  </div>
                   <div className="text-orange-500 text-sm/6 text-center bg-orange-100 rounded-full px-4 border border-orange-500">
                     ${product.price.toFixed(2)}
                   </div>
@@ -368,29 +405,47 @@ export default function ProductsPage() {
                   exit={{ scale: 0.9, opacity: 0 }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <h2 className="text-xl font-semibold mb-4">Modifier : {selectedProduct.name}</h2>
+                  <h2 className="text-xl font-semibold mb-4">
+                    Modifier : {selectedProduct.name}
+                  </h2>
 
                   <label className="block font-semibold mb-1">Nom</label>
                   <input
                     {...register("name", { required: "Nom requis" })}
                     className="w-full border border-gray-900/25 rounded-lg text-gray-400 px-3 py-2"
                   />
-                  {errors.name && <p className="text-red-500 mb-2">{errors.name.message}</p>}
+                  {errors.name && (
+                    <p className="text-red-500 mb-2">
+                      {errors.name.message}
+                    </p>
+                  )}
 
                   <label className="block font-semibold mb-1">Catégorie</label>
                   <input
                     {...register("category", { required: "Catégorie requise" })}
                     className="w-full border border-gray-900/25 rounded-lg text-gray-400 px-3 py-2"
                   />
-                  {errors.category && <p className="text-red-500 mb-2">{errors.category.message}</p>}
+                  {errors.category && (
+                    <p className="text-red-500 mb-2">
+                      {errors.category.message}
+                    </p>
+                  )}
 
-                  <label className="block font-semibold mb-1">Description</label>
+                  <label className="block font-semibold mb-1">
+                    Description
+                  </label>
                   <textarea
-                    {...register("description", { required: "Description requise" })}
+                    {...register("description", {
+                      required: "Description requise",
+                    })}
                     className="w-full border border-gray-900/25 rounded-lg text-gray-400 px-3 py-2"
                     rows={3}
                   />
-                  {errors.description && <p className="text-red-500 mb-2">{errors.description.message}</p>}
+                  {errors.description && (
+                    <p className="text-red-500 mb-2">
+                      {errors.description.message}
+                    </p>
+                  )}
 
                   <label className="block font-semibold mb-1">Prix (USD)</label>
                   <input
@@ -403,14 +458,24 @@ export default function ProductsPage() {
                     })}
                     className="w-full border border-gray-900/25 rounded-lg text-gray-400 px-3 py-2"
                   />
-                  {errors.price && <p className="text-red-500 mb-2">{errors.price.message}</p>}
+                  {errors.price && (
+                    <p className="text-red-500 mb-2">
+                      {errors.price.message}
+                    </p>
+                  )}
 
-                  <label className="block font-semibold mb-1">URL image</label>
+                  <label className="block font-semibold mb-1">
+                    URL image
+                  </label>
                   <input
                     {...register("image", { required: "URL image requise" })}
                     className="w-full border border-gray-900/25 rounded-lg text-gray-400 px-3 py-2"
                   />
-                  {errors.image && <p className="text-red-500 mb-2">{errors.image.message}</p>}
+                  {errors.image && (
+                    <p className="text-red-500 mb-2">
+                      {errors.image.message}
+                    </p>
+                  )}
 
                   <div className="flex justify-end gap-4">
                     <button
