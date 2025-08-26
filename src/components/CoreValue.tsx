@@ -23,7 +23,7 @@ export default function CorevPage() {
         <div className='space-y-6 mb-6 items-center justify-center text-center'>
             <br />
             <br />
-            <p className="uppercase text-sm tracking-widest text-orange-600 barlow-condensed-regular">valeurs fondamentales</p>
+            <h3 className="uppercase mb-3 text-sm tracking-widest text-orange-600 barlow-condensed-regular">valeurs fondamentales</h3>
             <h1 className="text-4xl font-bold text-gray-700">
                 <span className="block font-light text-gray-700">Nos Valeurs</span>
                

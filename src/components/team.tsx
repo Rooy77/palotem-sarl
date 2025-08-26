@@ -103,7 +103,7 @@ export default function TeamSection() {
     <section className="bg-gray-100 py-20" id="equipe">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <p className="text-orange-500 barlow-condensed-regular uppercase text-sm">Notre Équipe</p>
+          <h3 className="text-orange-500 font-regular uppercase tracking-widest text-sm">Notre Équipe</h3>
           <h2 className="text-4xl font-bold text-gray-800">
             Des professionnels talentueux <br />
             <span className="font-light text-gray-700">portés par nos valeurs</span>

@@ -38,7 +38,7 @@ export default function AboutPage() {
           <section className="items-center">
             {/* Text Content */}
             <div className="space-y-6">
-              <p className="uppercase barlow-condensed-regular text-sm tracking-widest text-orange-600">À propos de nous</p>
+              <h3 className="text-orange-500 mb-3 font-regular uppercase tracking-widest text-sm">À propos de nous</h3>
               <h1 className="text-4xl font-bold text-gray-700">
                 <span className="block font-light text-gray-900">Bienvenue chez</span>
                 Royal Import Export Sarl

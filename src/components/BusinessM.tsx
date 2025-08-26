@@ -6,7 +6,7 @@ export default function AboutPage() {
       <div className="grid mb-9 md:grid-cols-2 gap-10 items-center">
         {/* Contenu Texte */}
         <div className="space-y-6">
-          <p className="uppercase text-sm tracking-widest text-orange-600 barlow-condensed-regular">MODÈLE ÉCONOMIQUE</p>
+          <h3 className="text-orange-500 font-regular uppercase mb-3 tracking-widest text-sm">MODÈLE ÉCONOMIQUE</h3>
           <h1 className="text-4xl font-bold text-gray-700">
             <span className="block font-light text-gray-700">Notre modèle économique repose</span>
             sur une mise en valeur
