@@ -11,6 +11,7 @@ const LINKS = [
       { name: "Nos services", href: "/service" },
       { name: "Nos Produits", href: "/product" },
       { name: "Blog", href: "/blog" },
+      { name : "Palotem Mining Sarlu", href:""},
       { name : "Palotem Tanzania", href:""},
     ],
   },

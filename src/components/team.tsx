@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import { FaFacebookF, FaXTwitter, FaLinkedinIn } from "react-icons/fa6"; // Ajout LinkedIn
+import { FaFacebookF, FaXTwitter, FaLinkedinIn } from "react-icons/fa6";
 
 
 const teamMembers = [
@@ -118,21 +117,19 @@ export default function TeamSection() {
         </div>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center">
-          {teamMembers.map((member, index) => (
-            <div
-              key={index}
-              className="bg-white overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-            >
-              <div className="w-full h-48 relative">
-                <Image
-                  src={member.img}
-                  alt={member.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+          {teamMembers.map((member, index) => {
+            const initial = member.name.trim().charAt(0).toUpperCase() || "P";
 
-              <div className="px-4 py-6 text-center">
+            return (
+              <div
+                key={index}
+                className="bg-white overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+              >
+                <div className="w-full h-48 bg-gradient-to-br from-orange-500 to-orange-700 flex items-center justify-center">
+                  <span className="text-6xl font-bold text-white select-none">{initial}</span>
+                </div>
+
+                <div className="px-4 py-6 text-center">
                 <h3 className="text-lg sm:text-xl font-medium text-gray-900">{member.name}</h3>
                 <p className="text-orange-500 text-sm sm:text-sm">{member.role}</p>
                 <p className="mt-2 text-sm text-gray-600">{member.desc}</p>
@@ -164,8 +161,8 @@ export default function TeamSection() {
                   </a>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
