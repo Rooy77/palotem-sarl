@@ -130,35 +130,36 @@ export default function TeamSection() {
                 </div>
 
                 <div className="px-4 py-6 text-center">
-                <h3 className="text-lg sm:text-xl font-medium text-gray-900">{member.name}</h3>
-                <p className="text-orange-500 text-sm sm:text-sm">{member.role}</p>
-                <p className="mt-2 text-sm text-gray-600">{member.desc}</p>
+                  <h3 className="text-lg sm:text-xl font-medium text-gray-900">{member.name}</h3>
+                  <p className="text-orange-500 text-sm sm:text-sm">{member.role}</p>
+                  <p className="mt-2 text-sm text-gray-600">{member.desc}</p>
 
-                <div className="mt-4 flex justify-center gap-3">
-                  <a
-                    href={member.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border-orange-500 border hover:bg-orange-500 hover:text-gray-100 text-orange-500 rounded-full p-2 transition-all duration-300"
-                  >
-                    <FaFacebookF size={15} />
-                  </a>
-                  <a
-                    href={member.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border-orange-500 border hover:bg-orange-500 hover:text-gray-100 text-orange-500 rounded-full p-2 transition-all duration-300"
-                  >
-                    <FaXTwitter size={15} />
-                  </a>
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border-orange-500 border hover:bg-orange-500 hover:text-gray-100 text-orange-500 rounded-full p-2 transition-all duration-300"
-                  >
-                    <FaLinkedinIn size={15} />
-                  </a>
+                  <div className="mt-4 flex justify-center gap-3">
+                    <a
+                      href={member.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border-orange-500 border hover:bg-orange-500 hover:text-gray-100 text-orange-500 rounded-full p-2 transition-all duration-300"
+                    >
+                      <FaFacebookF size={15} />
+                    </a>
+                    <a
+                      href={member.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border-orange-500 border hover:bg-orange-500 hover:text-gray-100 text-orange-500 rounded-full p-2 transition-all duration-300"
+                    >
+                      <FaXTwitter size={15} />
+                    </a>
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border-orange-500 border hover:bg-orange-500 hover:text-gray-100 text-orange-500 rounded-full p-2 transition-all duration-300"
+                    >
+                      <FaLinkedinIn size={15} />
+                    </a>
+                  </div>
                 </div>
               </div>
             );
