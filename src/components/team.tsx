@@ -18,6 +18,7 @@ const teamMembers = [
     name: "MOISE MPINDA",
     role: "Directeur Administratif",
     desc: "Supervise les opérations administratives et les processus internes.",
+    phone: "+243 990 313 006, +243 991 360 476",
     img: "/img/glod.jpg",
     facebook: "https://facebook.com/claire.mbuyi",
     twitter: "https://x.com/claire_mbuyi",
@@ -118,20 +119,42 @@ export default function TeamSection() {
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center">
           {teamMembers.map((member, index) => {
-            const initial = member.name.trim().charAt(0).toUpperCase() || "P";
+            const names = member.name.trim().split(/\s+/).filter(Boolean);
+            const initials = names
+              .slice(0, 2)
+              .map((part) => part.charAt(0).toUpperCase())
+              .join("") || "P";
 
             return (
               <div
                 key={index}
                 className="bg-white overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
               >
-                <div className="w-full h-48 bg-gradient-to-br from-orange-500 to-orange-700 flex items-center justify-center">
-                  <span className="text-6xl font-bold text-white select-none">{initial}</span>
+                <div className="pt-6 pb-4 flex items-center justify-center">
+                  <div className="w-28 h-28 rounded-full bg-gradient-to-br from-orange-500 to-orange-700 flex items-center justify-center shadow-lg">
+                    <span className="text-4xl font-bold text-white select-none">{initials}</span>
+                  </div>
                 </div>
 
-                <div className="px-4 py-6 text-center">
-                  <h3 className="text-lg sm:text-xl font-medium text-gray-900">{member.name}</h3>
+                <div className="px-4 pb-6 text-center">
+                  <h2 className="text-lg sm:text-xl font-medium text-gray-900">{member.name}</h2>
                   <p className="text-orange-500 text-sm sm:text-sm">{member.role}</p>
+                  {"phone" in member && member.phone && (
+                    <div className="mt-2 px-2 py-2 text-sm text-gray-700">
+                      {member.phone.split(",").map((phone) => {
+                        const number = phone.trim();
+                        return (
+                          <a
+                            key={number}
+                            href={`tel:${number.replace(/\s+/g, "")}`}
+                            className="block py-1 whitespace-nowrap hover:text-orange-500"
+                          >
+                            {number}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  )}
                   <p className="mt-2 text-sm text-gray-600">{member.desc}</p>
 
                   <div className="mt-4 flex justify-center gap-3">
