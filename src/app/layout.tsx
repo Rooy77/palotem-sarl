@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import AppWrapper from '@/components/AppWrapper'
 
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -11,7 +10,8 @@ export const metadata: Metadata = {
   description: 'une société unipersonnelle régie par l’Acte uniforme',
   openGraph: {
     title: 'Société Palotem Sarl',
-    description: 'Notre expertise couvre le commerce général, l’import-export, les produits agricoles, les matériaux de construction, le génie civil, les énergies et les services logistiques',
+    description:
+      'Notre expertise couvre le commerce général, l’import-export, les produits agricoles, les matériaux de construction, le génie civil, les énergies et les services logistiques',
     url: 'https://palotem-sarl.vercel.app/',
     siteName: 'Palotem Sarl',
     images: [
@@ -28,20 +28,21 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Société Palotem Sarl',
-    description: 'Notre expertise couvre le commerce général, l’import-export, les produits agricoles, les matériaux de construction, le génie civil, les énergies et les services logistiques.',
-    images: ['https://palotem-sarl.vercel.app/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75'],
+    description:
+      'Notre expertise couvre le commerce général, l’import-export, les produits agricoles, les matériaux de construction, le génie civil, les énergies et les services logistiques.',
+    images: [
+      'https://palotem-sarl.vercel.app/_next/image?url=%2Fimg%2Fglod.jpg&w=640&q=75',
+    ],
   },
 }
 
 export default function RootLayout({
-  children, params }: {
+  children,
+}: {
   children: React.ReactNode
-  params: { locale: string }
 }) {
-  
- 
   return (
-    <html lang={params.locale}>
+    <html lang="fr">
       <head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
